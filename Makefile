@@ -14,7 +14,9 @@ endif
 
 all preset: clean
 	$(SRCDIR)/scripts/select-packages.sh :$@ $(OUTPUT)
-	@$(MAKE) build
+	@if [[ -n "$$BRISE_BUILD_BINARIES" ]]; then \
+	  $(MAKE) build; \
+	fi
 
 build:
 	rime_deployer --build $(OUTPUT)
