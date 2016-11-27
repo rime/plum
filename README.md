@@ -40,49 +40,49 @@ to add a package to your Rime configuration.
 Essentials
 ---
 
-  - `prelude`: the prelude package, providing Rime's default settings
-  - `essay`: 八股文 / a shared vocabulary and language model
+  - [`prelude`](https://github.com/rime/rime-prelude): the prelude package, providing Rime's default settings
+  - [`essay`](https://github.com/rime/rime-essay): 八股文 / a shared vocabulary and language model
 
 Phonetic-based input methods
 ---
 Modern Standard Madarin
 
-  - `luna-pinyin`: 朙月拼音 / Pinyin in Tranditional Chinese
-  - `terra-pinyin`: 地球拼音 / School-taught Pinyin, with tone marks
-  - `bopomofo`: 注音 / Zhuyin (aka. Bopomofo)
-  - `pinyin-simp`: 袖珍簡化字拼音 / Pinyin in Simplified Chinese
+  - [`luna-pinyin`](https://github.com/rime/rime-luna-pinyin): 朙月拼音 / Pinyin in Tranditional Chinese
+  - [`terra-pinyin`](https://github.com/rime/rime-terra-pinyin): 地球拼音 / School-taught Pinyin, with tone marks
+  - [`bopomofo`](https://github.com/rime/rime-bopomofo): 注音 / Zhuyin (aka. Bopomofo)
+  - [`pinyin-simp`](https://github.com/rime/rime-pinyin-simp): 袖珍簡化字拼音 / Pinyin in Simplified Chinese
 
 Derivatives of Pinyin
 
-  - `double-pinyin`: 雙拼 / Double Pinyin (ZiRanMa, ABC, flyPY, MSPY, PYJJ variants)
-  - `combo-pinyin`: 宮保拼音 / Chord-typing Pinyin
-  - `stenotype`: 打字速記法 / a stenographic system derived from ABC Easy Shorthand
+  - [`double-pinyin`](https://github.com/rime/rime-double-pinyin): 雙拼 / Double Pinyin (ZiRanMa, ABC, flyPY, MSPY, PYJJ variants)
+  - [`combo-pinyin`](https://github.com/rime/rime-combo-pinyin): 宮保拼音 / Chord-typing Pinyin
+  - [`stenotype`](https://github.com/rime/rime-stenotype): 打字速記法 / a stenographic system derived from ABC Easy Shorthand
 
 Other modern varieties of Chinese
 
-  - `jyutping`: 粵拼 / Cantonese
-  - `wugniu`: 上海吳語 / Wu (Shanghainese)
-  - `soutzoe`: 蘇州吳語 / Wu (Suzhounese)
+  - [`jyutping`](https://github.com/rime/rime-jyutping): 粵拼 / Cantonese
+  - [`wugniu`](https://github.com/rime/rime-wugniu): 上海吳語 / Wu (Shanghainese)
+  - [`soutzoe`](https://github.com/rime/rime-soutzoe): 蘇州吳語 / Wu (Suzhounese)
 
 Middle Chinese
 
-  - `zyenpheng`: 中古漢語拼音 / Middle Chinese
+  - [`middle-chinese`](https://github.com/rime/rime-middle-chinese): 中古漢語拼音 / Middle Chinese Romanization
 
 Shape-based input methods
 ---
 
-  - `stroke`: 五筆畫 / five strokes
-  - `cangjie`: 倉頡輸入法 / Cangjie input method
-  - `quick`: 速成 / Simplified Cangjie
-  - `wubi`: 五筆字型
-  - `array`: 行列輸入法
-  - `scj`: 快速倉頡
+  - [`stroke`](https://github.com/rime/rime-stroke): 五筆畫 / five strokes
+  - [`cangjie`](https://github.com/rime/rime-cangjie): 倉頡輸入法 / Cangjie input method
+  - [`quick`](https://github.com/rime/rime-quick): 速成 / Simplified Cangjie
+  - [`wubi`](https://github.com/rime/rime-wubi): 五筆字型
+  - [`array`](https://github.com/rime/rime-array): 行列輸入法
+  - [`scj`](https://github.com/rime/rime-scj): 快速倉頡
 
 Miscelaneous
 ---
 
-  - `emoji`: 繪文字 / input emoji with English or Chinese Pinyin keywords
-  - `ipa`: 國際音標 / International Phonetic Alphabet
+  - [`emoji`](https://github.com/rime/rime-emoji): 繪文字 / input emoji with English or Chinese Pinyin keywords
+  - [`ipa`](https://github.com/rime/rime-ipa): 國際音標 / International Phonetic Alphabet
 
 Install
 ===
