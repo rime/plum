@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 
-La brise
+東風破 / La brise
 ===
 Rime schema repository
 
@@ -21,9 +21,9 @@ This software is a collection of data packages used by [Rime](http://rime.im)
 to support various Chinese input methods, including those based on modern
 dialects or historical diasystems of the Chinese language.
 
-A **Rime input schema** defines a specific input method in Rime's DSL.
-It consists of a configuration file named `*.schema.yaml` where `*` is the
-schema ID, and an optional **Rime dictionary** file named `*.dict.yaml`.
+A **Rime input schema** describes the behaviors of a specific input method
+in Rime's DSL. It consists of a configuration file named `*.schema.yaml` where
+`*` is schema ID, and an optional **Rime dictionary** file named `*.dict.yaml`.
 
 A package may contain one or several interrelated input schemata and their
 affiliated Rime dictionaries.
@@ -86,14 +86,19 @@ To prepare your Rime configuration for [Squirrel](https://github.com/rime/squirr
 [ibus-rime](https://github.com/rime/ibus-rime), you can get started by running
 
 ```sh
-git clone https://github.com/rime/brise.git
-cd brise
-bash rime-install
+curl -fsSL https://git.io/v13uY | bash
 ```
 
-or to get the "preset" configuration (note the colon):
+Or to get the "preset" configuration (note the colon):
 
 ```sh
+curl -fsSL https://git.io/v13uY | bash -s -- :preset
+```
+
+This is equivalent to cloning this repo and running
+
+```sh
+cd brise
 bash rime-install :preset
 ```
 
