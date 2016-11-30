@@ -1,8 +1,11 @@
 ifeq ($(SRCDIR),)
-	SRCDIR=$(shell pwd)
+	SRCDIR=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 endif
 
-OUTPUT:=$(SRCDIR)/output
+# Tips: you can set OUTPUT to Rime user directory in the command line
+ifeq ($(OUTPUT),)
+	OUTPUT:=$(SRCDIR)/output
+endif
 
 ifeq ($(PREFIX),)
 	PREFIX=/usr
@@ -13,7 +16,7 @@ ifeq ($(RIME_DATA_DIR),)
 endif
 
 all preset: clean
-	$(SRCDIR)/scripts/select-packages.sh :$@ $(OUTPUT)
+	bash $(SRCDIR)/scripts/select-packages.sh :$@ $(OUTPUT)
 	@if [[ -n "$$BRISE_BUILD_BINARIES" ]]; then \
 	  $(MAKE) build; \
 	fi
@@ -22,7 +25,7 @@ build:
 	rime_deployer --build $(OUTPUT)
 
 install:
-	@echo "installing rime data to '$(DESTDIR)$(RIME_DATA_DIR)'."
+	@echo "Installing Rime data to '$(DESTDIR)$(RIME_DATA_DIR)'."
 	@install -d $(DESTDIR)$(RIME_DATA_DIR)
 	@install -m 644 $(OUTPUT)/*.* $(DESTDIR)$(RIME_DATA_DIR)
 

@@ -31,12 +31,6 @@ affiliated Rime dictionaries.
 Packages
 ===
 
-/* TODO: implement this */ With `rime-cli` you can
-```sh
-rime install <package-name>
-```
-to add a package to your Rime configuration.
-
 Essentials
 ---
 
@@ -84,8 +78,48 @@ Miscelaneous
   - [`emoji`](https://github.com/rime/rime-emoji): 繪文字 / input emoji with English or Chinese Pinyin keywords
   - [`ipa`](https://github.com/rime/rime-ipa): 國際音標 / International Phonetic Alphabet
 
+Usage
+===
+
+To prepare your Rime configuration for [Squirrel](https://github.com/rime/squirrel),
+[Weasel](https://github.com/rime/weasel) or
+[ibus-rime](https://github.com/rime/ibus-rime), you can get started by running
+
+```sh
+git clone https://github.com/rime/brise.git
+cd brise
+bash rime-install
+```
+
+or to get the "preset" configuration (note the colon):
+
+```sh
+bash rime-install :preset
+```
+
+You can then add packages, many of them, from great Rime developers on GitHub:
+
+```sh
+bash rime-install middle-chinese lotem/rime-zhung acevery/rime-zhengma
+```
+
+For other Rime distributions, specify the path to Rime user directory in the
+command line:
+
+```sh
+rime_dir=$HOME/.config/fcitx/rime bash rime-install
+```
+
+To update la brise itself, run
+
+```sh
+bash rime-install update
+```
+
 Install
 ===
+
+The Makefile builds and installs Rime data as a binary package on Unix systems.
 
 Build dependencies
 ---

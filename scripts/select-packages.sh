@@ -1,11 +1,12 @@
 #!/bin/bash
 
 script_dir=$(dirname "$0")
-build_target="$1"
+root_dir=$(dirname "${script_dir}")
+configuration="$1"
 output_dir="$2"
 
-if [[ -z "$build_target" ]] || [[ -z "$output_dir" ]]; then
-    echo "Usage: $(basename "$0") :all|:preset|<package-name> <output-directory>"
+if [[ -z "$configuration" ]] || [[ -z "$output_dir" ]]; then
+    echo "Usage: $(basename "$0") :<configuration>|<package-name> <output-directory>"
     exit 1
 fi
 
@@ -13,9 +14,11 @@ set -e
 
 [[ -d "${output_dir}" ]] || mkdir -p "${output_dir}"
 
+files_updated=0
+
 select_package() {
     local package="$1"
-    local package_dir="${package##*/}"
+    local package_dir="${root_dir}/${package##*/}"
     if ! [[ -d "${package_dir}" ]]; then
         "${script_dir}"/fetch-package.sh "${package}" "${package_dir}"
     elif [[ -n "$BRISE_UPDATE_PACKAGES" ]]; then
@@ -23,25 +26,33 @@ select_package() {
     fi
     local data_files=$(ls "${package_dir}"/*.* | grep -e '\.txt$' -e '\.yaml$')
     if [[ -z "${data_files}" ]]; then
-        exit 1
+        return
     fi
     for data_file in ${data_files}; do
         cp "${data_file}" "${output_dir}"
+        ((++files_updated))
     done
 }
 
-. "${script_dir}"/../package-list.conf
-
-case "${build_target}" in
-    :all|:preset)
-        packages=$(eval echo \${${build_target#:}_packages[@]})
+case "${configuration}" in
+    *.conf)
+        . "${configuration}"
+        ;;
+    :*)
+        . "${root_dir}/${configuration#:}"-packages.conf
         ;;
     *)
-        packages="${build_target}"
+        package_list=("${configuration}")
         ;;
 esac
 
-for package in ${packages}; do
-    echo "Package: [${package}]"
+for package in ${package_list[@]}; do
+    echo "Package: ${package}"
     select_package "${package}"
 done
+
+if [[ "${files_updated}" -eq 0 ]]; then
+    echo 'No files updated.'
+else
+    echo "Updated ${files_updated} files from ${#package_list[@]} packages in '${output_dir}'"
+fi

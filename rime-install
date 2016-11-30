@@ -1,0 +1,53 @@
+#!/bin/bash
+
+brise_repo=rime/brise
+
+if [[ -z "${rime_dir}" ]]; then
+    # Output to default Rime user directory
+    case "$OSTYPE" in
+        darwin*)
+            # Squirrel
+            rime_dir="$HOME/Library/Rime"
+            ;;
+        linux*)
+            # ibus-rime
+            rime_dir="$HOME/.config/ibus/rime"
+            ;;
+        cygwin* | msys* | win*)
+            # Weasel
+            rime_dir="$APPDATA/Rime"
+            ;;
+        *)
+            rime_dir='.'
+            ;;
+    esac
+fi
+
+if [[ -z "${brise_dir}" ]]; then
+    # am I in a working copy already?
+    brise_dir=$(dirname "$0")
+    if ! [[ -d "${brise_dir}/scripts" ]]; then
+        # make a copy of la brise in a subdirectory
+        brise_dir='brise'
+    fi
+fi
+
+if ! [[ -e "${brise_dir}" ]]; then
+    git clone --depth 1 "https://github.com/${brise_repo}.git" "${brise_dir}"
+fi
+
+if [[ $# -eq 0 ]]; then
+    targets=(':all')
+else
+    targets=$@
+fi
+
+for target in ${targets[@]}; do
+    if [[ "${target}" == 'update' ]]; then
+        echo "Updating la brise at '${brise_dir}'"
+        (cd "${brise_dir}"; git pull)
+        continue
+    fi
+
+    bash "${brise_dir}"/scripts/select-packages.sh "${target}" "${rime_dir}"
+done
