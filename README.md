@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 
-東風破 / La brise
+La brise: 東風破
 ===
 Rime schema repository
 
