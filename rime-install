@@ -1,6 +1,8 @@
 #!/bin/bash
 
-brise_repo=rime/brise
+if [[ -z "${brise_repo}" ]]; then
+    brise_repo='rime/brise'
+fi
 
 if [[ -z "${rime_dir}" ]]; then
     # Output to default Rime user directory
