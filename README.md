@@ -95,9 +95,10 @@ Or to get the "preset" configuration (note the colon):
 curl -fsSL https://git.io/v13uY | bash -s -- :preset
 ```
 
-This is equivalent to cloning this repo and running
+This is equivalent to cloning this repo and running `rime-install`:
 
 ```sh
+git clone --depth 1 https://github.com/rime/brise.git
 cd brise
 bash rime-install :preset
 ```
