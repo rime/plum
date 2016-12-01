@@ -18,7 +18,9 @@ files_updated=0
 
 select_package() {
     local package="$1"
-    local package_dir="${root_dir}/${package##*/}"
+    local repo_name="${package##*/}"
+    local package_name="${repo_name#rime-}"
+    local package_dir="${root_dir}/${package_name}"
     if ! [[ -d "${package_dir}" ]]; then
         "${script_dir}"/fetch-package.sh "${package}" "${package_dir}"
     elif [[ -n "$BRISE_UPDATE_PACKAGES" ]]; then
