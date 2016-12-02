@@ -37,6 +37,10 @@ select_package() {
 }
 
 case "${configuration}" in
+    https://github.com/*/raw/*-packages.conf | https://raw.githubusercontent.com/*-packages.conf)
+        curl -fLO "${configuration}"
+        . $(basename "${configuration}")
+        ;;
     *.conf)
         . "${configuration}"
         ;;
