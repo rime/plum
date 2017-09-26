@@ -21,6 +21,9 @@ all preset: clean
 	  $(MAKE) build; \
 	fi
 
+minimal: clean
+	bash $(SRCDIR)/scripts/minimal-build.sh $(OUTPUT)
+
 build:
 	rime_deployer --build $(OUTPUT)
 
@@ -32,4 +35,4 @@ install:
 clean:
 	rm -rf $(OUTPUT) > /dev/null 2>&1 || true
 
-.PHONY: all preset build install clean
+.PHONY: all preset minimal build install clean
