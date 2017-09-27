@@ -30,8 +30,8 @@ for schema in *.schema.yaml; do
 done
 
 ls *.schema.yaml | sed 's/^\(.*\)\.schema\.yaml/  - schema: \1/' > schema_list.yaml
-# grep -Ff schema_list.yaml default.yaml > schema_list.yaml.min
-# mv schema_list.yaml.min schema_list.yaml
+grep -Ff schema_list.yaml default.yaml > schema_list.yaml.min
+mv schema_list.yaml.min schema_list.yaml
 sed '{
   s/^config_version: \(["]*\)\([0-9.]*\)\(["]*\)$/config_version: \1\2.minimal\3/
   /- schema:/d
