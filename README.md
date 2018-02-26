@@ -114,6 +114,18 @@ list of package names or `user/repo`:
 bash rime-install middle-chinese lotem/rime-zhung acevery/rime-zhengma
 ```
 
+Lastly, it's also possible to install other author's Rime configuration from a
+`*-packages.conf` file hosted on GitHub. For example, navigate to this page
+
+https://github.com/lotem/rime-forge/blob/master/lotem-packages.conf
+
+click the "Raw" button on the top-right corner of source code listing, and
+copy the URL to the raw file into the command
+
+```sh
+bash rime-install https://raw.githubusercontent.com/lotem/rime-forge/master/lotem-packages.conf
+```
+
 For third-party Rime distributions, specify the path to Rime user directory in
 the command line:
 
