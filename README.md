@@ -89,7 +89,11 @@ To prepare your Rime configuration for [Squirrel](https://github.com/rime/squirr
 curl -fsSL https://git.io/v13uY | bash
 ```
 
-Or to get the "preset" configuration (note the colon):
+This runs the `rime-install` script to download preset packages and install
+source files to Rime user directory. (yet it doesn't enable new schemas for you)
+
+Alternatively, you can specify a configuration among `:preset`, `:extra` and
+`:all` (note the colon):
 
 ```sh
 curl -fsSL https://git.io/v13uY | bash -s -- :preset
@@ -103,14 +107,15 @@ cd brise
 bash rime-install :preset
 ```
 
-You can then add packages, many of them, from great Rime developers on GitHub:
+You can then add packages from great Rime developers on GitHub by specifying a
+list of package names or `user/repo`:
 
 ```sh
 bash rime-install middle-chinese lotem/rime-zhung acevery/rime-zhengma
 ```
 
-For other Rime distributions, specify the path to Rime user directory in the
-command line:
+For third-party Rime distributions, specify the path to Rime user directory in
+the command line:
 
 ```sh
 rime_dir=$HOME/.config/fcitx/rime bash rime-install
@@ -142,7 +147,7 @@ Run-time dependencies
 Build and install
 ---
 
-The make target `all` uses `git` command line to download the latest packages
+The default make target uses `git` command line to download the latest packages
 from GitHub.
 
 ```sh

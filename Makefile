@@ -15,7 +15,7 @@ ifeq ($(RIME_DATA_DIR),)
 	RIME_DATA_DIR=$(PREFIX)/share/rime-data
 endif
 
-all preset: clean
+preset extra all: clean
 	bash $(SRCDIR)/scripts/select-packages.sh :$@ $(OUTPUT)
 	@if [[ -n "$$BRISE_BUILD_BINARIES" ]]; then \
 	  $(MAKE) build; \

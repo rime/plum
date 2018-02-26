@@ -39,7 +39,7 @@ if ! [[ -e "${brise_dir}" ]]; then
 fi
 
 if [[ $# -eq 0 ]]; then
-    targets=(':all')
+    targets=(':preset')
 else
     targets=$@
 fi
