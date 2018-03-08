@@ -23,7 +23,8 @@ select_package() {
     local package_dir="${root_dir}/${package_name}"
     if ! [[ -d "${package_dir}" ]]; then
         "${script_dir}"/fetch-package.sh "${package}" "${package_dir}"
-    elif [[ -n "$BRISE_UPDATE_PACKAGES" ]]; then
+    elif [[ -z "${no_update_pkg:+1}" ]]; then
+        echo "Updating package: ${package}"
         (cd "${package_dir}"; git pull)
     fi
     local data_files=$(ls "${package_dir}"/*.* | grep -e '\.txt$' -e '\.yaml$')
