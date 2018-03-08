@@ -136,7 +136,7 @@ rime_dir=$HOME/.config/fcitx/rime bash rime-install
 To update la brise itself, run
 
 ```sh
-bash rime-install update
+bash rime-install self-update
 ```
 
 Install

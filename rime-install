@@ -45,7 +45,7 @@ else
 fi
 
 for target in ${targets[@]}; do
-    if [[ "${target}" == 'update' ]]; then
+    if [[ "${target}" == 'self-update' ]]; then
         echo "Updating la brise at '${brise_dir}'"
         (cd "${brise_dir}"; git pull)
         continue
