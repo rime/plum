@@ -16,7 +16,7 @@ set -e
 
 files_updated=0
 
-select_package() {
+install_package() {
     local package="$1"
     local repo_name="${package##*/}"
     local package_name="${repo_name#rime-}"
@@ -70,7 +70,7 @@ case "${configuration}" in
 esac
 
 for package in ${package_list[@]}; do
-    select_package "${package}"
+    install_package "${package}"
 done
 
 if [[ "${files_updated}" -eq 0 ]]; then

@@ -6,7 +6,7 @@ root_dir=$(dirname "${script_dir}")
 output_dir="$1"
 
 for package in essay luna-pinyin prelude; do
-  bash "${script_dir}/select-packages.sh" "${package}" "${output_dir}"
+  bash "${script_dir}/install-packages.sh" "${package}" "${output_dir}"
 done
 
 pushd "${output_dir}" > /dev/null

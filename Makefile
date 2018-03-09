@@ -16,7 +16,7 @@ ifeq ($(RIME_DATA_DIR),)
 endif
 
 preset extra all: clean
-	bash $(SRCDIR)/scripts/select-packages.sh :$@ $(OUTPUT)
+	bash $(SRCDIR)/scripts/install-packages.sh :$@ $(OUTPUT)
 	@if [[ -n "$$build_bin" ]]; then \
 	  $(MAKE) build; \
 	fi

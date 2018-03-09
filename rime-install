@@ -51,5 +51,5 @@ for target in ${targets[@]}; do
         continue
     fi
 
-    bash "${brise_dir}"/scripts/select-packages.sh "${target}" "${rime_dir}"
+    bash "${brise_dir}"/scripts/install-packages.sh "${target}" "${rime_dir}"
 done
