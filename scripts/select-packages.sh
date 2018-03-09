@@ -22,17 +22,33 @@ select_package() {
     local package_name="${repo_name#rime-}"
     local package_dir="${root_dir}/${package_name}"
     if ! [[ -d "${package_dir}" ]]; then
+        echo "Downloading package: ${package}"
         "${script_dir}"/fetch-package.sh "${package}" "${package_dir}"
     elif [[ -z "${no_update_pkg:+1}" ]]; then
         echo "Updating package: ${package}"
         (cd "${package_dir}"; git pull)
+    else
+        echo "Found package: ${package}"
     fi
-    local data_files=$(ls "${package_dir}"/*.* | grep -e '\.txt$' -e '\.yaml$')
-    if [[ -z "${data_files}" ]]; then
+    local data_files=(
+        $(ls "${package_dir}"/*.* | grep -e '\.txt$' -e '\.yaml$')
+    )
+    if [[ "${#data_files[@]}" -eq 0 ]]; then
         return
     fi
-    for data_file in ${data_files}; do
-        cp "${data_file}" "${output_dir}"
+    local file_name
+    local target_file
+    for data_file in "${data_files[@]}"; do
+        file_name="$(basename "${data_file}")"
+        target_file="${output_dir}/${file_name}"
+        if ! [ -e "${target_file}" ]; then
+            echo "Installing: ${file_name}"
+        elif ! diff -q "${data_file}" "${target_file}"; then
+            echo "Updating: ${file_name}"
+        else
+            continue
+        fi
+        cp "${data_file}" "${target_file}"
         ((++files_updated))
     done
 }
@@ -54,7 +70,6 @@ case "${configuration}" in
 esac
 
 for package in ${package_list[@]}; do
-    echo "Package: ${package}"
     select_package "${package}"
 done
 
