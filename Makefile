@@ -17,7 +17,7 @@ endif
 
 preset extra all: clean
 	bash $(SRCDIR)/scripts/select-packages.sh :$@ $(OUTPUT)
-	@if [[ -n "$$BRISE_BUILD_BINARIES" ]]; then \
+	@if [[ -n "$$build_bin" ]]; then \
 	  $(MAKE) build; \
 	fi
 

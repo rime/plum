@@ -168,10 +168,10 @@ sudo make install
 ```
 
 You can optionally build YAML files to binaries by setting the shell variable
-`BRISE_BUILD_BINARIES`. To build preset packages, do
+`build_bin`. To build preset packages, do
 
 ```sh
-BRISE_BUILD_BINARIES=yes make preset
+build_bin=1 make preset
 ```
 
 Credits
