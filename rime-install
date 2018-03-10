@@ -1,5 +1,9 @@
 #!/bin/bash
 
+script_dir="$(dirname "$0")/scripts"
+
+source "${script_dir}/styles.sh"
+
 if [[ -z "${brise_repo}" ]]; then
     brise_repo='rime/brise'
 fi
@@ -46,7 +50,7 @@ fi
 
 for target in ${targets[@]}; do
     if [[ "${target}" == 'self-update' ]]; then
-        echo "Updating la brise at '${brise_dir}'"
+        echo $(result "Updating la brise at") $(strong "'${brise_dir}'")
         (cd "${brise_dir}"; git pull)
         continue
     fi

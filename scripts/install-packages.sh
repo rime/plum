@@ -5,6 +5,8 @@ root_dir=$(dirname "${script_dir}")
 configuration="$1"
 output_dir="$2"
 
+source "${script_dir}/styles.sh"
+
 if [[ -z "$configuration" ]] || [[ -z "$output_dir" ]]; then
     echo "Usage: $(basename "$0") :<configuration>|<package-name> <output-directory>"
     exit 1
@@ -22,13 +24,13 @@ install_package() {
     local package_name="${repo_name#rime-}"
     local package_dir="${root_dir}/${package_name}"
     if ! [[ -d "${package_dir}" ]]; then
-        echo "Downloading package: ${package}"
+        echo $(info 'Downloading package:') $(highlight "${package}")
         "${script_dir}"/fetch-package.sh "${package}" "${package_dir}"
     elif [[ -z "${no_update_pkg:+1}" ]]; then
-        echo "Updating package: ${package}"
+        echo $(info 'Updating package:') $(highlight "${package}")
         (cd "${package_dir}"; git pull)
     else
-        echo "Found package: ${package}"
+        echo $(info 'Found package:') $(highlight "${package}")
     fi
     local data_files=(
         $(ls "${package_dir}"/*.* | grep -e '\.txt$' -e '\.yaml$')
@@ -42,9 +44,9 @@ install_package() {
         file_name="$(basename "${data_file}")"
         target_file="${output_dir}/${file_name}"
         if ! [ -e "${target_file}" ]; then
-            echo "Installing: ${file_name}"
+            echo $(info 'Installing:') $(strong "${file_name}")
         elif ! diff -q "${data_file}" "${target_file}"; then
-            echo "Updating: ${file_name}"
+            echo $(info 'Updating:') $(strong "${file_name}")
         else
             continue
         fi
@@ -74,7 +76,8 @@ for package in ${package_list[@]}; do
 done
 
 if [[ "${files_updated}" -eq 0 ]]; then
-    echo 'No files updated.'
+    echo $(result 'No files updated.')
 else
-    echo "Updated ${files_updated} files from ${#package_list[@]} packages in '${output_dir}'"
+    echo $(result "Updated ${files_updated} files from ${#package_list[@]} packages in") \
+         $(strong "'${output_dir}'")
 fi
