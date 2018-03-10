@@ -1,7 +1,7 @@
 #!/bin/bash
 
-script_dir=$(dirname "$0")
-root_dir=$(dirname "${script_dir}")
+script_dir="$(dirname "$0")"
+root_dir="$(dirname "${script_dir}")"
 configuration="$1"
 output_dir="$2"
 
@@ -32,6 +32,7 @@ install_package() {
     else
         echo $(info 'Found package:') $(highlight "${package}")
     fi
+    local IFS=$'\r\n'
     local data_files=(
         $(ls "${package_dir}"/*.* | grep -e '\.txt$' -e '\.yaml$')
     )
@@ -58,7 +59,7 @@ install_package() {
 case "${configuration}" in
     https://github.com/*/raw/*-packages.conf | https://raw.githubusercontent.com/*-packages.conf)
         curl -fLO "${configuration}"
-        . $(basename "${configuration}")
+        . "$(basename "${configuration}")"
         ;;
     *.conf)
         . "${configuration}"
@@ -71,7 +72,7 @@ case "${configuration}" in
         ;;
 esac
 
-for package in ${package_list[@]}; do
+for package in "${package_list[@]}"; do
     install_package "${package}"
 done
 
