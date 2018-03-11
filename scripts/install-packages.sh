@@ -79,6 +79,6 @@ done
 if [[ "${files_updated}" -eq 0 ]]; then
     echo $(result 'No files updated.')
 else
-    echo $(result "Updated ${files_updated} files from ${#package_list[@]} packages in") \
-         $(strong "'${output_dir}'")
+    echo $(result "Updated ${files_updated} files " \
+                  "from ${#package_list[@]} packages in") "'${output_dir}'"
 fi

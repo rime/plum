@@ -21,7 +21,7 @@ if [[ -z "${rime_dir}" ]]; then
             ;;
         cygwin* | msys* | win*)
             # Weasel
-            rime_dir="$APPDATA/Rime"
+            rime_dir="$APPDATA\\Rime"
             ;;
         *)
             rime_dir='.'
@@ -50,7 +50,7 @@ fi
 
 for target in ${targets[@]}; do
     if [[ "${target}" == 'self-update' ]]; then
-        echo $(result "Updating la brise at") $(strong "'${brise_dir}'")
+        echo $(result "Updating la brise at") "'${brise_dir}'"
         (cd "${brise_dir}"; git pull)
         continue
     fi
