@@ -4,8 +4,8 @@ script_dir="$(dirname "$0")/scripts"
 
 source "${script_dir}/styles.sh"
 
-if [[ -z "${brise_repo}" ]]; then
-    brise_repo='rime/brise'
+if [[ -z "${plum_repo}" ]]; then
+    plum_repo='rime/plum'
 fi
 
 if [[ -z "${rime_dir}" ]]; then
@@ -29,17 +29,17 @@ if [[ -z "${rime_dir}" ]]; then
     esac
 fi
 
-if [[ -z "${brise_dir}" ]]; then
+if [[ -z "${plum_dir}" ]]; then
     # am I in a working copy already?
-    brise_dir="$(dirname "$0")"
-    if ! [[ -d "${brise_dir}/scripts" ]]; then
-        # make a copy of la brise in a subdirectory
-        brise_dir='brise'
+    plum_dir="$(dirname "$0")"
+    if ! [[ -d "${plum_dir}/scripts" ]]; then
+        # make a copy of plum in a subdirectory
+        plum_dir='plum'
     fi
 fi
 
-if ! [[ -e "${brise_dir}" ]]; then
-    git clone --depth 1 "https://github.com/${brise_repo}.git" "${brise_dir}"
+if ! [[ -e "${plum_dir}" ]]; then
+    git clone --depth 1 "https://github.com/${plum_repo}.git" "${plum_dir}"
 fi
 
 if [[ $# -eq 0 ]]; then
@@ -50,10 +50,10 @@ fi
 
 for target in ${targets[@]}; do
     if [[ "${target}" == 'self-update' ]]; then
-        echo $(result "Updating la brise at") "'${brise_dir}'"
-        (cd "${brise_dir}"; git pull)
+        echo $(result "Updating plum at") "'${plum_dir}'"
+        (cd "${plum_dir}"; git pull)
         continue
     fi
 
-    bash "${brise_dir}"/scripts/install-packages.sh "${target}" "${rime_dir}"
+    bash "${plum_dir}"/scripts/install-packages.sh "${target}" "${rime_dir}"
 done
