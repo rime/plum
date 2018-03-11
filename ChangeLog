@@ -1,0 +1,136 @@
+2016-11-18  GONG Chen  <chen.sst@gmail.com>
+
+	* preset, supplement, extra: split into packages, per input method.
+	* default.yaml, symbols.yaml: moved to the prelude package.
+	* essay.txt: moved to a dedicated package.
+	* scripts/split-packages.sh: to split data files into packages.
+
+2014-12-14  GONG Chen  <chen.sst@gmail.com>
+
+	* preset/bopomofo: fix syllabification errors when tones are omitted.
+	* preset/cangjie5: enable single_char_filter; enable "/fh" style symbols.
+	* preset/luna_pinyin: enable "/fh" style symbols; update table.
+	* preset/terra_pinyin: update table.
+	* supplement/jyutping: update table.
+	* supplement/double_pinyin_pyjj.schema.yaml: new double pinyin schema
+	originated from PinyinPlusPlus.
+	* opencc/s2t.json: OpenCC 1.0 config file for Simp. to Trad. Chinese
+	conversion.
+	* opencc/t2s.json: OpenCC 1.0 config file for Trad. to Simp. Chinese
+	conversion.
+	* opencc/t2hk.json: OpenCC 1.0 config file for conversion to Hong Kong
+	standard.
+	* opencc/t2tw.json: OpenCC 1.0 config file for conversion to Taiwan
+	standard.
+	* symbols.yaml: reorder frequently used symbols.
+	* essay.txt: fix bugs.
+
+2014-07-19  GONG Chen  <chen.sst@gmail.com>
+
+	* default.yaml: add switch 'ascii_punct' to switch on and off Chinese
+	punctuations; add hotkey Control+. to toggle ascii_punct;
+	add hotkey Control+h for BackSpace, Control+[ for Escape;
+	clear unfinished input when switching off Chinese mode with Caps Lock;
+	enable folded options in schema list, press space key to unfold.
+	* essay.txt: replaces essay.kct in installed files; fix bugs.
+	* symbols.yaml: /bdz for Chinese punctuations in vertical writing.
+	* stroke.dict.yaml: adopt BSD license as approved by its original author.
+	* combo_pinyin: silently ignore invalid chords.
+	* luna_pinyin_fluency: input various numeric characters with /0 ~ /10.
+	* luna_pinyin, terra_pinyin, emoji, stroke, zyenpheng: update tables.
+
+	- Brise 0.35 release.
+
+2013-12-26  GONG Chen  <chen.sst@gmail.com>
+
+	* symbols.yaml: rearranged symbol table by Patricivs.
+	* emoji: more Emoji symbols; support tips and alternative spellings.
+	* jyutping: include more Cantonese phrases.
+	* essay.txt, luna_pinyin, terra_pinyin: lots of improvements.
+
+	- Brise 0.32 release.
+
+
+2013-11-10  GONG Chen  <chen.sst@gmail.com>
+
+	* default.yaml, symbols.yaml: prefer middle dot U+00B7 to U+30FB.
+	* bopomofo_tw: bopomofo, output in Taiwan standard.
+	* jyutping: include more characters.
+	* luna_pinyin_simp: enable hotkey Control+Shift+4 to toggle
+	  simplified/traditional Chinese mode.
+	* essay.txt, luna_pinyin, terra_pinyin: lots of improvements.
+
+	- Brise 0.30 release.
+
+2013-09-05  GONG Chen  <chen.sst@gmail.com>
+
+	* cangjie5, wubi86: make phrases based on commit history.
+	* stroke: replaces 'stroke_simp' and 'stroke5'.
+
+	- Brise 0.28 release.
+
+2013-05-05  GONG Chen  <chen.sst@gmail.com>
+
+	* essay.txt, luna_pinyin, terra_pinyin: lots of bug-fixes.
+	* wubi86: auto-commit complete words. (max_code_length: 4)
+	* luna_pinyin*: enable user created custom_phrase.txt (rime>=0.9.9)
+
+	- Brise 0.22 release.
+
+2013-03-08  GONG Chen  <chen.sst@gmail.com>
+
+	* essay.kct: removed; to be generated with `make`
+	* essay.txt: import phrases from moedict.tw
+	* luna_pinyin, terra_pinyin: import phrases from moedict.tw
+
+2013-02-22  lxk  <lxk1012@gmail.com>
+
+	* array30, scj6, stroke5, wubi_trad, cangjie5, cangjie5_express,
+luna_pinyin, luna_pinyin_fluency, luna_pinyin_simp, luna_pinyin_tw,
+terra_pinyin, combo_pinyin, double_pinyin_abc, jyutping, pinyin_simp, quick5,
+soutzoe, stroke_simp, triungkox3p, wubi86, wubi_pinyin, wugniu, wugniu_lopha,
+zyenpheng: correct preedit_format concerning 'ü'.
+
+	* default.yaml: update recognizer patterns for email & url.
+
+2013-02-02  GONG Chen  <chen.sst@gmail.com>
+
+	* bopomofo: enable using space key to input first tone instead of to select a
+	candidate, thus allow ommitting the rhyme and/or the tone after a consonant.
+
+	* cangjie5_express: Cangjie with auto-select feature enabled.
+
+	* default.yaml: add options to control Caps Lock behavior.
+
+	* essay: update vocabulary database.
+
+	* luna_pinyin, terra_pinyin, jyutping, wugniu: update tables.
+
+	* luna_pinyin_simp: input special characters with mnemonics such as '/ts'.
+
+	* symbols.yaml: table of punctuation and special characters.
+
+	- Brise 0.18 release.
+
+2013-01-12  GONG Chen  <chen.sst@gmail.com>
+
+	* soutzoe: a phonetic input method in Soochow dialect.
+
+	* bopomofo: automatically commit sentences followed by a comma or a period.
+	* double_pinyin_flypy: fix preedit representation 'dn' -> 'diao'
+
+	* luna_pinyin, terra_pinyin, jyutping: update tables.
+	* essay: update vocabulary database.
+	prefer 群/SRTQ, 峰/UHEJ, 麵/JEMWL to their equivalents 羣/XSRTQ , 峯/XUHEJ, 麪/JEMLS in phrases.
+
+	- Brise 0.16 release.
+
+2012-09-25  GONG Chen  <chen.sst@gmail.com>
+
+	* Makefile: install data files from a separate package.
+	* luna_pinyin, terra_pinyin, jyutping: update tables.
+	* essay: update vocabulary database.
+	* emoji: new schema.
+
+	- Brise 0.13 release.
+

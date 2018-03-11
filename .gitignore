@@ -1,0 +1,4 @@
+*~
+/output/
+/[-_[:alnum:]]*/
+!/scripts/
