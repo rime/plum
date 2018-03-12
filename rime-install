@@ -39,7 +39,7 @@ if [[ -z "${brise_dir}" ]]; then
 fi
 
 if ! [[ -e "${brise_dir}" ]]; then
-    git clone --depth 1 --shallow-submodules "https://github.com/${brise_repo}.git" "${brise_dir}"
+    git clone --depth 1 "https://github.com/${brise_repo}.git" "${brise_dir}"
 fi
 
 if [[ $# -eq 0 ]]; then
