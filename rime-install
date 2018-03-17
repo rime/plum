@@ -31,7 +31,7 @@ fi
 
 if [[ -z "${brise_dir}" ]]; then
     # am I in a working copy already?
-    brise_dir=$(dirname "$0")
+    brise_dir="$(dirname "$0")"
     if ! [[ -d "${brise_dir}/scripts" ]]; then
         # make a copy of la brise in a subdirectory
         brise_dir='brise'
