@@ -26,7 +26,7 @@ install_package() {
     if ! [[ -d "${package_dir}" ]]; then
         echo $(info 'Downloading package:') $(highlight "${package}")
         "${script_dir}"/fetch-package.sh "${package}" "${package_dir}"
-    elif [[ -z "${no_update_pkg:+1}" ]]; then
+    elif [[ -z "${no_update:+1}" ]]; then
         echo $(info 'Updating package:') $(highlight "${package}")
         (cd "${package_dir}"; git pull)
     else
