@@ -46,7 +46,7 @@ install_package() {
         target_file="${output_dir}/${file_name}"
         if ! [ -e "${target_file}" ]; then
             echo $(info 'Installing:') $(strong "${file_name}")
-        elif ! diff -q "${data_file}" "${target_file}"; then
+        elif ! diff -q "${data_file}" "${target_file}" &> /dev/null; then
             echo $(info 'Updating:') $(strong "${file_name}")
         else
             continue
