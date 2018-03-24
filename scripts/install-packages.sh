@@ -5,6 +5,8 @@ root_dir="$(dirname "${script_dir}")"
 configuration="$1"
 output_dir="$2"
 
+option_no_update="${no_update:+1}"
+
 source "${script_dir}/styles.sh"
 
 if [[ -z "$configuration" ]] || [[ -z "$output_dir" ]]; then
@@ -20,13 +22,34 @@ files_updated=0
 
 install_package() {
     local package="$1"
+    # a package order take the form "<github-user>/<repository-name>@<branch>"
+    # the "<github-user>/" and/or "@<branch>" parts can be ommitted
+    local branch
+    local branch_label
+    if [[ "${package}" =~ @ ]]; then
+        branch="${package##*@}"
+        branch_label="@${branch}"
+        package="${package%@*}"
+    fi
+    local user_name
+    if [[ "${package}" =~ / ]]; then
+        user_name="${package%/*}"
+    fi
     local repo_name="${package##*/}"
+    local user_prefix
+    if [[ -n "${user_name}" ]] && [[ "${user_name}" != 'rime' ]]; then
+        user_prefix="${user_name}-"
+    fi
     local package_name="${repo_name#rime-}"
-    local package_dir="${root_dir}/${package_name}"
+    local package_dir="${root_dir}/${user_prefix}${package_name}"
     if ! [[ -d "${package_dir}" ]]; then
-        echo $(info 'Downloading package:') $(highlight "${package}")
-        "${script_dir}"/fetch-package.sh "${package}" "${package_dir}"
-    elif [[ -z "${no_update:+1}" ]]; then
+        echo $(info 'Downloading package:') $(highlight "${package}") $(print_option "${branch_label}")
+        local fetch_options=()
+        if [[ -n "${branch}" ]]; then
+            fetch_options+=(--branch "${branch}")
+        fi
+        "${script_dir}"/fetch-package.sh "${package}" "${package_dir}" "${fetch_options[@]}"
+    elif [[ -z "${option_no_update}" ]]; then
         echo $(info 'Updating package:') $(highlight "${package}")
         (cd "${package_dir}"; git pull)
     else

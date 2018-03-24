@@ -7,7 +7,7 @@ package_name="$1"
 shift
 
 if [[ -z "${package_name}" ]]; then
-    echo "Usage: $(basename "$0") <package-name> [<directory>]"
+    echo "Usage: $(basename "$0") <package-name> [<directory>] [-b <branch>]"
     exit 1
 fi
 
