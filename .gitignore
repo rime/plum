@@ -1,4 +1,3 @@
 *~
-/output/
-/[-_[:alnum:]]*/
-!/scripts/
+/package
+/output

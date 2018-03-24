@@ -31,17 +31,13 @@ install_package() {
         branch_label="@${branch}"
         package="${package%@*}"
     fi
-    local user_name
+    local user_name='rime'
     if [[ "${package}" =~ / ]]; then
         user_name="${package%/*}"
     fi
     local repo_name="${package##*/}"
-    local user_prefix
-    if [[ -n "${user_name}" ]] && [[ "${user_name}" != 'rime' ]]; then
-        user_prefix="${user_name}-"
-    fi
     local package_name="${repo_name#rime-}"
-    local package_dir="${root_dir}/${user_prefix}${package_name}"
+    local package_dir="${root_dir}/package/${user_name}/${package_name}"
     if ! [[ -d "${package_dir}" ]]; then
         echo $(info 'Downloading package:') $(highlight "${package}") $(print_option "${branch_label}")
         local fetch_options=()
