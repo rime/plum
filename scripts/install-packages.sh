@@ -45,9 +45,9 @@ install_package() {
         file_name="$(basename "${data_file}")"
         target_file="${output_dir}/${file_name}"
         if ! [ -e "${target_file}" ]; then
-            echo $(info 'Installing:') $(strong "${file_name}")
+            echo $(info 'Installing:') $(print_item "${file_name}")
         elif ! diff -q "${data_file}" "${target_file}" &> /dev/null; then
-            echo $(info 'Updating:') $(strong "${file_name}")
+            echo $(info 'Updating:') $(print_item "${file_name}")
         else
             continue
         fi
@@ -77,8 +77,8 @@ for package in "${package_list[@]}"; do
 done
 
 if [[ "${files_updated}" -eq 0 ]]; then
-    echo $(result 'No files updated.')
+    echo $(print_result 'No files updated.')
 else
-    echo $(result "Updated ${files_updated} files " \
-                  "from ${#package_list[@]} packages in") "'${output_dir}'"
+    echo $(print_result "Updated ${files_updated} files " \
+                        "from ${#package_list[@]} packages in") "'${output_dir}'"
 fi

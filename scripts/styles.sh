@@ -47,10 +47,22 @@ info() {
   echo -e "${bold_green}$@${reset}"
 }
 
-strong() {
+warning() {
+  echo -e "${bold_yellow}$@${reset}"
+}
+
+error() {
+  echo -e "${bold_red}$@${reset}"
+}
+
+print_item() {
   echo -e "${cyan}$@${reset}"
 }
 
-result() {
+print_option() {
+  echo -e "${magenta}$@${reset}"
+}
+
+print_result() {
   echo -e "${yellow}$@${reset}"
 }

@@ -50,7 +50,7 @@ fi
 
 for target in ${targets[@]}; do
     if [[ "${target}" == 'plum' ]]; then
-        echo $(result "Updating plum at") "'${plum_dir}'"
+        echo $(print_result "Updating plum at") "'${plum_dir}'"
         (cd "${plum_dir}"; git pull)
         continue
     fi
