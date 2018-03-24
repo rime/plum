@@ -45,12 +45,19 @@ install_package() {
             fetch_options+=(--branch "${branch}")
         fi
         "${script_dir}"/fetch-package.sh "${package}" "${package_dir}" "${fetch_options[@]}"
-    elif [[ -z "${option_no_update}" ]]; then
-        echo $(info 'Updating package:') $(highlight "${package}")
-        (cd "${package_dir}"; git pull)
     else
-        echo $(info 'Found package:') $(highlight "${package}")
+        if [[ -z "${option_no_update}" ]]; then
+            echo $(info 'Updating package:') $(highlight "${package}")
+        else
+            echo $(info 'Found package:') $(highlight "${package}")
+        fi
+        "${script_dir}"/update-package.sh "${package_dir}" "${branch}"
     fi
+    install_files_from_package "${package_dir}"
+}
+
+install_files_from_package() {
+    local package_dir="$1"
     local IFS=$'\r\n'
     local data_files=(
         $(ls "${package_dir}"/*.* | grep -e '\.txt$' -e '\.yaml$')
