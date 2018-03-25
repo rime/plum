@@ -1,32 +1,7 @@
 #!/bin/bash
 
-script_dir="$(dirname "$0")/scripts"
-
-source "${script_dir}/styles.sh"
-
 if [[ -z "${plum_repo}" ]]; then
     plum_repo='rime/plum'
-fi
-
-if [[ -z "${rime_dir}" ]]; then
-    # Output to default Rime user directory
-    case "$OSTYPE" in
-        darwin*)
-            # Squirrel
-            rime_dir="$HOME/Library/Rime"
-            ;;
-        linux*)
-            # ibus-rime
-            rime_dir="$HOME/.config/ibus/rime"
-            ;;
-        cygwin* | msys* | win*)
-            # Weasel
-            rime_dir="$APPDATA\\Rime"
-            ;;
-        *)
-            rime_dir='.'
-            ;;
-    esac
 fi
 
 if [[ -z "${plum_dir}" ]]; then
@@ -42,6 +17,14 @@ if ! [[ -e "${plum_dir}" ]]; then
     git clone --depth 1 "https://github.com/${plum_repo}.git" "${plum_dir}"
 fi
 
+source "${plum_dir}"/scripts/styles.sh
+
+if [[ -z "${rime_dir}" ]]; then
+    # Output to Rime user directory
+    source "${plum_dir}"/scripts/frontend.sh
+    guess_rime_user_dir  # exports `rime_dir`
+fi
+
 if [[ $# -eq 0 ]]; then
     targets=(':preset')
 else
@@ -55,5 +38,5 @@ for target in ${targets[@]}; do
         continue
     fi
 
-    bash "${plum_dir}"/scripts/install-packages.sh "${target}" "${rime_dir}"
+    bash "${plum_dir}"/scripts/install-packages.sh "${target}" "${rime_dir:-.}"
 done
