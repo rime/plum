@@ -82,10 +82,30 @@ install_files_from_package() {
     done
 }
 
+expand_configuration_url() {
+    if [[ "$1" =~ ^https:// ]]; then
+        echo "$1"
+    elif [[ "$1" =~ ^([^:@/]*)/([^:@/]*)(@[^:@/]*)?/([^:@]*-packages.conf)$ ]]; then
+        local user="${BASH_REMATCH[1]}"
+        local repo="${BASH_REMATCH[2]}"
+        local branch="${BASH_REMATCH[3]#@}"
+        local filepath="${BASH_REMATCH[4]}"
+        echo "https://github.com/${user}/${repo}/raw/${branch:-master}/${filepath}"
+    fi
+}
+
 case "${configuration}" in
-    https://github.com/*/raw/*-packages.conf | https://raw.githubusercontent.com/*-packages.conf)
-        curl -fLO "${configuration}"
-        . "$(basename "${configuration}")"
+    */*/*-packages.conf |\
+        https://github.com/*/raw/*-packages.conf |\
+        https://raw.githubusercontent.com/*-packages.conf)
+        configuration_url="$(expand_configuration_url "${configuration}")"
+        if [[ -z "${configuration_url}" ]]; then
+            echo $(error 'ERROR:') "unable to recognize configuration: ${configuration}" >&2
+            exit 1
+        fi
+        echo $(info 'Fetching') "${configuration_url}"
+        curl -fLO "${configuration_url}"
+        . "$(basename "${configuration_url}")"
         ;;
     *.conf)
         . "${configuration}"
