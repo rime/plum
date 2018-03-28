@@ -1,55 +1,56 @@
 <meta charset="UTF-8">
 
-La brise: 東風破
-===
-Rime schema repository
+# 東風破 /plum/
 
-Project home
----
+Rime configuration manager and input schema repository
+
+## Project home
+
 [rime.im](http://rime.im)
 
-License
----
-GPLv3
+## Introduction
 
-Individual packages in this collection can be released under different licenses.
-Please refer to their respective LICENSE files.
+**/plum/** is a configuration manager for [Rime](http://rime.im) input method engine.
 
-Contents
-===
-This software is a collection of data packages used by [Rime](http://rime.im)
-to support various Chinese input methods, including those based on modern
-dialects or historical diasystems of the Chinese language.
+It's designed for Rime users to install and update the default configuration and a collection
+of data packages maintained by Rime Developers (https://github.com/rime).
 
-A **Rime input schema** describes the behaviors of a specific input method
-in Rime's DSL. It consists of a configuration file named `*.schema.yaml` where
-`*` is schema ID, and an optional **Rime dictionary** file named `*.dict.yaml`.
+It also works perfectly well with personal configuration hosted on GitHub and input schema packages
+from third-party developers.
 
-A package may contain one or several interrelated input schemata and their
-affiliated Rime dictionaries.
+A **Rime input schema** defines the rules of a specific "input method", or in technical terms
+how user input sequences are interpreted by the Rime input method engine.
+It consists of a configuration file named `<schema_id>.schema.yaml`, and usually an optional
+**Rime dictionary** file named `*.dict.yaml`.
 
-Packages
-===
+A package may contain one or several interrelated input schemata and their affiliated Rime dictionaries.
+A package is also good for publishing general configuration files and data files that are used by Rime.
 
-Essentials
----
+## Packages
+
+This is an index of the packages maintained by Rime Developers as separate projects.
+
+These packages aim to offer a sensible default configuration for most users, and support various
+Chinese input methods including those based on modern dialects and historical Chinese phonology.
+
+### Essentials
 
   - [`prelude`](https://github.com/rime/rime-prelude): the prelude package, providing Rime's default settings
   - [`essay`](https://github.com/rime/rime-essay): 八股文 / a shared vocabulary and language model
 
-Phonetic-based input methods
----
+### Phonetic-based input methods
+
 Modern Standard Madarin
 
-  - [`luna-pinyin`](https://github.com/rime/rime-luna-pinyin): 朙月拼音 / Pinyin in Tranditional Chinese
+  - [`luna-pinyin`](https://github.com/rime/rime-luna-pinyin): 朙月拼音 / Pinyin input method for Tranditional Chinese
   - [`terra-pinyin`](https://github.com/rime/rime-terra-pinyin): 地球拼音 / School-taught Pinyin, with tone marks
   - [`bopomofo`](https://github.com/rime/rime-bopomofo): 注音 / Zhuyin (aka. Bopomofo)
-  - [`pinyin-simp`](https://github.com/rime/rime-pinyin-simp): 袖珍簡化字拼音 / Pinyin in Simplified Chinese
+  - [`pinyin-simp`](https://github.com/rime/rime-pinyin-simp): 袖珍簡化字拼音
 
 Derivatives of Pinyin
 
   - [`double-pinyin`](https://github.com/rime/rime-double-pinyin): 雙拼 / Double Pinyin (ZiRanMa, ABC, flyPY, MSPY, PYJJ variants)
-  - [`combo-pinyin`](https://github.com/rime/rime-combo-pinyin): 宮保拼音 / Chord-typing Pinyin
+  - [`combo-pinyin`](https://github.com/rime/rime-combo-pinyin): 宮保拼音 / [Combo Pinyin](https://github.com/rime/home/wiki/ComboPinyin), a chord-typing input method
   - [`stenotype`](https://github.com/rime/rime-stenotype): 打字速記法 / a stenographic system derived from ABC Easy Shorthand
 
 Other modern varieties of Chinese
@@ -62,8 +63,7 @@ Middle Chinese
 
   - [`middle-chinese`](https://github.com/rime/rime-middle-chinese): 中古漢語拼音 / Middle Chinese Romanization
 
-Shape-based input methods
----
+### Shape-based input methods
 
   - [`stroke`](https://github.com/rime/rime-stroke): 五筆畫 / five strokes
   - [`cangjie`](https://github.com/rime/rime-cangjie): 倉頡輸入法 / Cangjie input method
@@ -72,21 +72,19 @@ Shape-based input methods
   - [`array`](https://github.com/rime/rime-array): 行列輸入法
   - [`scj`](https://github.com/rime/rime-scj): 快速倉頡
 
-Miscelaneous
----
+### Miscelaneous
 
   - [`emoji`](https://github.com/rime/rime-emoji): 繪文字 / input emoji with English or Chinese Pinyin keywords
   - [`ipa`](https://github.com/rime/rime-ipa): 國際音標 / International Phonetic Alphabet
 
-Usage
-===
+## Usage
 
-To prepare your Rime configuration for [Squirrel](https://github.com/rime/squirrel),
-[Weasel](https://github.com/rime/weasel) or
-[ibus-rime](https://github.com/rime/ibus-rime), you can get started by running
+To prepare your Rime configuration for [ibus-rime](https://github.com/rime/ibus-rime),
+[Squirrel](https://github.com/rime/squirrel) or
+[Weasel](https://github.com/rime/weasel), you can get started by running
 
 ```sh
-curl -fsSL https://git.io/v13uY | bash
+curl -fsSL https://git.io/rime-install | bash
 ```
 
 This runs the `rime-install` script to download preset packages and install
@@ -96,71 +94,81 @@ Alternatively, you can specify a configuration among `:preset`, `:extra` and
 `:all` (note the colon):
 
 ```sh
-curl -fsSL https://git.io/v13uY | bash -s -- :preset
+curl -fsSL https://git.io/rime-install | bash -s -- :preset
 ```
 
-This is equivalent to cloning this repo and running `rime-install`:
+This is equivalent to cloning this repo and then running `rime-install`:
 
 ```sh
-git clone --depth 1 https://github.com/rime/brise.git
-cd brise
+git clone --depth 1 https://github.com/rime/plum.git
+cd plum
 bash rime-install :preset
 ```
 
-You can then add packages from great Rime developers on GitHub by specifying a
-list of package names or `user/repo`:
+You can then add packages from all the great Rime developers on GitHub by specifying
+a list of package names or refer to packages by `<user>/<repo>`:
 
 ```sh
-bash rime-install middle-chinese lotem/rime-zhung acevery/rime-zhengma
+bash rime-install jyutping lotem/rime-zhung acevery/rime-zhengma
+
+# optionally, specific a branch by appending "@<branch-name>"
+bash rime-install jyutping@master lotem/rime-zhung@master
 ```
 
 Lastly, it's also possible to install other author's Rime configuration from a
-`*-packages.conf` file hosted on GitHub. For example, navigate to this page
+`*-packages.conf` file hosted on GitHub. For example:
 
-https://github.com/lotem/rime-forge/blob/master/lotem-packages.conf
-
-click the "Raw" button on the top-right corner of source code listing, and
-copy the URL to the raw file into the command
 
 ```sh
-bash rime-install https://raw.githubusercontent.com/lotem/rime-forge/master/lotem-packages.conf
+bash rime-install https://github.com/lotem/rime-forge/raw/master/lotem-packages.conf
+
+# or in short form: "<user>/<repo>/<filepath>"
+bash rime-install lotem/rime-forge/lotem-packages.conf
+
+# or specify a branch: "<user>/<repo>@<branch>/<filepath>"
+bash rime-install lotem/rime-forge@master/lotem-packages.conf
 ```
 
-For third-party Rime distributions, specify the path to Rime user directory in
-the command line:
+For third-party Rime distributions, specify the `rime_frontend` variable in the command line:
 
 ```sh
-rime_dir=$HOME/.config/fcitx/rime bash rime-install
+rime_frontend=fcitx-rime bash rime-install
 ```
 
-To update la brise itself, run
+or set `rime_dir` to Rime user directory
 
 ```sh
-bash rime-install self-update
+rime_dir="$HOME/.config/fcitx/rime" bash rime-install
 ```
 
-Install
-===
+To update /plum/ itself, run
 
-The Makefile builds and installs Rime data as a binary package on Unix systems.
+```sh
+bash rime-install plum
+```
 
-Build dependencies
----
+## Install as shared data
 
-- git
-- librime>=1.3 (for `rime_deployer`)
+The `Makefile` builds and installs Rime data as a software on Unix systems.
 
-Run-time dependencies
----
+For downstream packagers for the package management systems of the OS, it's recommend to create
+separate packages for the /plum/ configuration manager (possibly named `rime-plum` or `rime-install`)
+and the data package(s) (possibly named `rime-data`, or `rime-data-*` if separated into many)
+created by the make targets.
+
+### Build dependencies
+
+  - git
+  - librime>=1.3 (for `rime_deployer`)
+
+### Run-time dependencies
 
   - librime>=1.3
   - opencc>=1.0.2
 
-Build and install
----
+### Build and install
 
-The default make target uses `git` command line to download the latest packages
-from GitHub.
+The default make target uses `git` command to download the latest packages from GitHub.
 
 ```sh
 make
@@ -168,14 +176,24 @@ sudo make install
 ```
 
 You can optionally build YAML files to binaries by setting the shell variable
-`build_bin`. To build preset packages, do
+`build_bin`. This saves user's time building those files on first startup.
 
 ```sh
-build_bin=1 make preset
+build_bin=1 make
 ```
 
-Credits
-===
+## License
+
+Code in the `rime/plum` repository is licensed under **LGPLv3**.
+Please refer to the `LICENSE` file in the project root directory.
+
+**Note** that make targets provided by the `Makefile` may include files downloaded by the
+configuration manager. Individual packages can be released under different licenses.
+Please refer to their respective `LICENSE` files.
+The license compatible with all the maintained packages is **GPLv3**.
+
+## Credits
+
 We are grateful to the makers of the following open source projects:
 
   - [Android Pinyin IME](https://source.android.com/) (Apache 2.0)
@@ -193,11 +211,11 @@ Also to the inventors of the following input methods:
   - Scj / 快速倉頡 by 麥志洪
   - Middle Chinese Romanization / 中古漢語拼音 by 古韻
 
-Contributors
-===
-The repository is a result of collective effort. It was set up by the following
+## Contributors
+
+This software is a result of collective effort. It was set up by the following
 people by contributing files, patches and pull-requests. See also the
-[contributors](https://github.com/rime/brise/graphs/contributors) page for a
+[contributors](https://github.com/rime/plum/graphs/contributors) page for a
 list of open-source collaborators.
 
   - [佛振](https://github.com/lotem)
@@ -214,10 +232,3 @@ list of open-source collaborators.
   - 四季的風
   - 上海閒話abc
   - 吳語越音
-
-Contributing
-===
-Pull requests are welcome for established, open-source input methods that
-haven't been included in the repository. Thank you!
-But you'll be responsible for providing source files along with an open-source
-license because licensing will be rigidly scrutinized by downstream packagers.
