@@ -7,8 +7,14 @@ set git_version=2.16.3
 set git_release=.1
 
 set git_installer=Git-%git_version%%git_release:.1=%-64-bit.exe
-set git_download_url=https://github.com/git-for-windows/git/releases/download/v%git_version%.windows%git_release%/%git_installer%
 
+if "%git_mirror%" == "taobao" (
+  set git_download_url_prefix=https://npm.taobao.org/mirrors/git-for-windows/
+) else (
+  set git_download_url_prefix=https://github.com/git-for-windows/git/releases/download/
+)
+
+set git_download_url=%git_download_url_prefix%v%git_version%.windows%git_release%/%git_installer%
 
 where /q bash
 if %errorlevel% neq 0 (
