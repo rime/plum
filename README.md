@@ -13,7 +13,7 @@ Rime configuration manager and input schema repository
 **/plum/** is a configuration manager for [Rime](http://rime.im) input method engine.
 
 It's designed for Rime users to install and update the default configuration and a collection
-of data packages maintained by Rime Developers (https://github.com/rime).
+of data packages maintained by [Rime Developers](https://github.com/rime).
 
 It also works perfectly well with personal configuration hosted on GitHub and input schema packages
 from third-party developers.
@@ -87,17 +87,22 @@ To prepare your Rime configuration for [ibus-rime](https://github.com/rime/ibus-
 curl -fsSL https://git.io/rime-install | bash
 ```
 
-This runs the `rime-install` script to download preset packages and install
-source files to Rime user directory. (yet it doesn't enable new schemas for you)
+*Mac users:* open `Terminal.app`, paste the command into the terminal and hit enter;
 
-Alternatively, you can specify a configuration among `:preset`, `:extra` and
-`:all` (note the colon):
+*Windows users:* please refer to the [Windows bootstrap script](#windows) section for initial setup.
+
+The one-liner runs the `rime-install` script to download preset packages and install
+source files to Rime user directory. (Yet it doesn't enable new schemas for you)
+
+## Advanced Usage
+
+Alternatively, you can specify a configuration among `:preset`, `:extra` and `:all` (note the colon):
 
 ```sh
 curl -fsSL https://git.io/rime-install | bash -s -- :preset
 ```
 
-This is equivalent to cloning this repo and then running `rime-install`:
+This is equivalent to cloning this repo and running the local copy of `rime-install`:
 
 ```sh
 git clone --depth 1 https://github.com/rime/plum.git
@@ -145,6 +150,33 @@ To update /plum/ itself, run
 
 ```sh
 bash rime-install plum
+```
+
+<a name="windows"></a>
+## Windows bootstrap script
+
+To get started on Windows, download <https://git.io/rime-install.bat>
+
+Open a Command Prompt window from Start Menu (or press `Win+R`, type `cmd`, press enter),
+`cd` to the download directory and run `rime-install.bat`.
+
+If [Git for Windows](https://gitforwindows.org/) is not installed or not available in your `PATH`,
+the script first tries to download and install it for you.
+
+In China, it's probably faster to download Git from a local mirror. Use the following command instead:
+
+```batch
+(set git_mirror=taobao) && rime-install
+```
+
+Next time, to re-install or update the preset configuration, you can just double-click `rime-install.bat`.
+
+You can also set options and/or specify packages to install, for example:
+
+```batch
+set no_update=1
+set rime_frontend=weasel
+rime-install :preset combo-pinyin jyutping wubi
 ```
 
 ## Install as shared data
