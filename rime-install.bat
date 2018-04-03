@@ -1,0 +1,42 @@
+@echo off
+
+setlocal
+
+rem check for updates at https://github.com/git-for-windows/git/releases/latest
+set git_version=2.16.3
+set git_release=.1
+
+set git_installer=Git-%git_version%%git_release:.1=%-64-bit.exe
+set git_download_url=https://github.com/git-for-windows/git/releases/download/v%git_version%.windows%git_release%/%git_installer%
+
+
+where /q bash
+if %errorlevel% neq 0 (
+   if exist %git_installer% (
+      echo Found installer: %git_installer%
+   ) else (
+      echo Downloading installer: %git_installer%
+      curl -fsSLO %git_download_url%
+      if not exist %git_installer% (
+         echo Error downloading %git_installer%
+         exit /b 1
+      )
+      echo Download complete: %git_installer%
+   )
+   echo Installing git ...
+   %git_installer% /GitAndUnixToolsOnPath
+)
+
+set PATH=%ProgramFiles%\Git\cmd;%ProgramFiles%\Git\mingw64\bin;%ProgramFiles%\Git\usr\bin;%PATH%
+rem path
+
+if not defined plum_dir (
+   set plum_dir=plum
+)
+
+if exist "%plum_dir%"/rime-install (
+   bash "%plum_dir%"/rime-install %*
+) else (
+  echo Downloading rime-install ...
+  curl -fsSL https://git.io/rime-install | bash -s -- %*
+)
