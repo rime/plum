@@ -6,7 +6,9 @@ rem check for updates at https://github.com/git-for-windows/git/releases/latest
 set git_version=2.16.3
 set git_release=.1
 
-set git_installer=Git-%git_version%%git_release:.1=%-64-bit.exe
+if defined ProgramFiles(x86) (set arch=64) else (set arch=32)
+
+set git_installer=Git-%git_version%%git_release:.1=%-%arch%-bit.exe
 
 if "%git_mirror%" == "taobao" (
   set git_download_url_prefix=https://npm.taobao.org/mirrors/git-for-windows/
@@ -33,7 +35,7 @@ if %errorlevel% neq 0 (
    %git_installer% /GitAndUnixToolsOnPath
 )
 
-set PATH=%ProgramFiles%\Git\cmd;%ProgramFiles%\Git\mingw64\bin;%ProgramFiles%\Git\usr\bin;%PATH%
+set PATH=%ProgramFiles%\Git\cmd;%ProgramFiles%\Git\mingw%arch%\bin;%ProgramFiles%\Git\usr\bin;%PATH%
 rem path
 
 if not defined plum_dir (
