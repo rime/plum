@@ -2,15 +2,16 @@
 
 script_dir="$(dirname "$0")"
 root_dir="$(dirname "${script_dir}")"
-configuration="$1"
+target="$1"
 output_dir="$2"
 
 option_no_update="${no_update:+1}"
 
 source "${script_dir}"/bootstrap.sh
 require 'styles'
+require 'resolver'
 
-if [[ -z "$configuration" ]] || [[ -z "$output_dir" ]]; then
+if [[ -z "$target" ]] || [[ -z "$output_dir" ]]; then
     echo "Usage: $(basename "$0") :<configuration>|<package-name> <output-directory>"
     exit 1
 fi
@@ -22,22 +23,11 @@ set -e
 files_updated=0
 
 install_package() {
-    local package="$1"
-    # a package order take the form "<github-user>/<repository-name>@<branch>"
-    # the "<github-user>/" and/or "@<branch>" parts can be ommitted
-    local branch
-    local branch_label
-    if [[ "${package}" =~ @ ]]; then
-        branch="${package##*@}"
-        branch_label="@${branch}"
-        package="${package%@*}"
-    fi
-    local user_name='rime'
-    if [[ "${package}" =~ / ]]; then
-        user_name="${package%/*}"
-    fi
-    local repo_name="${package##*/}"
-    local package_name="${repo_name#rime-}"
+    local user_name="$(resolve_user_name "$1")"
+    local package_name="$(resolve_package_name "$1")"
+    local branch="$(resolve_branch "$1")"
+    local package="${1%@*}"
+    local branch_label="${branch:+@${branch}}"
     local package_dir="${root_dir}/package/${user_name}/${package_name}"
     if ! [[ -d "${package_dir}" ]]; then
         echo $(info 'Downloading package:') $(highlight "${package}") $(print_option "${branch_label}")
@@ -83,41 +73,7 @@ install_files_from_package() {
     done
 }
 
-expand_configuration_url() {
-    if [[ "$1" =~ ^https:// ]]; then
-        echo "$1"
-    elif [[ "$1" =~ ^([^:@/]*)/([^:@/]*)(@[^:@/]*)?/([^:@]*-packages.conf)$ ]]; then
-        local user="${BASH_REMATCH[1]}"
-        local repo="${BASH_REMATCH[2]}"
-        local branch="${BASH_REMATCH[3]#@}"
-        local filepath="${BASH_REMATCH[4]}"
-        echo "https://github.com/${user}/${repo}/raw/${branch:-master}/${filepath}"
-    fi
-}
-
-case "${configuration}" in
-    */*/*-packages.conf |\
-        https://github.com/*/raw/*-packages.conf |\
-        https://raw.githubusercontent.com/*-packages.conf)
-        configuration_url="$(expand_configuration_url "${configuration}")"
-        if [[ -z "${configuration_url}" ]]; then
-            echo $(error 'ERROR:') "unable to recognize configuration: ${configuration}" >&2
-            exit 1
-        fi
-        echo $(info 'Fetching') "${configuration_url}"
-        curl -fLO "${configuration_url}"
-        . "$(basename "${configuration_url}")"
-        ;;
-    *.conf)
-        . "${configuration}"
-        ;;
-    :*)
-        . "${root_dir}/${configuration#:}"-packages.conf
-        ;;
-    *)
-        package_list=("${configuration}")
-        ;;
-esac
+load_package_list_from_target "${target}"
 
 for package in "${package_list[@]}"; do
     install_package "${package}"
