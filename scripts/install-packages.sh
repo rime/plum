@@ -7,7 +7,8 @@ output_dir="$2"
 
 option_no_update="${no_update:+1}"
 
-source "${script_dir}/styles.sh"
+source "${script_dir}"/bootstrap.sh
+require 'styles'
 
 if [[ -z "$configuration" ]] || [[ -z "$output_dir" ]]; then
     echo "Usage: $(basename "$0") :<configuration>|<package-name> <output-directory>"

@@ -7,7 +7,8 @@ branch="$2"
 
 option_no_update="${no_update:+1}"
 
-source "${script_dir}/styles.sh"
+source "${script_dir}"/bootstrap.sh
+require 'styles'
 
 if [[ -z "${package_dir}" ]]; then
     echo "Usage: $(basename "$0") <package-dir> [<branch>]"

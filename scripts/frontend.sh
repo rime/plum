@@ -1,5 +1,7 @@
 #!/bin/bash
 
+require 'styles'
+
 guess_rime_user_dir() {
     if [[ -n "${rime_dir}" ]]; then
         return
@@ -43,3 +45,5 @@ guess_rime_user_dir() {
     esac
     echo 'Installing for Rime frontend:' $(print_option "${rime_frontend:-(unknown)}")
 }
+
+provide 'frontend'

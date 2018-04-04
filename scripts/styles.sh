@@ -1,3 +1,5 @@
+# terminal colors and styles
+
 esc='\x1b'
 reset="${esc}[0m"
 bold="${esc}[1m"
@@ -66,3 +68,5 @@ print_option() {
 print_result() {
   echo -e "${yellow}$@${reset}"
 }
+
+provide 'styles'

@@ -17,11 +17,12 @@ if ! [[ -e "${plum_dir}" ]]; then
     git clone --depth 1 "https://github.com/${plum_repo}.git" "${plum_dir}"
 fi
 
-source "${plum_dir}"/scripts/styles.sh
+source "${plum_dir}"/scripts/bootstrap.sh
+require 'styles'
 
 if [[ -z "${rime_dir}" ]]; then
     # Output to Rime user directory
-    source "${plum_dir}"/scripts/frontend.sh
+    require 'frontend'
     guess_rime_user_dir  # exports `rime_dir`
 fi
 
@@ -33,7 +34,7 @@ fi
 
 for target in ${targets[@]}; do
     if [[ "${target}" == 'plum' ]]; then
-        echo $(print_result "Updating plum at") "'${plum_dir}'"
+        echo $(print_result 'Updating plum at') "'${plum_dir}'"
         (cd "${plum_dir}"; git pull)
         continue
     fi
