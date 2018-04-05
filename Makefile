@@ -35,4 +35,4 @@ install:
 clean:
 	rm -rf $(OUTPUT) > /dev/null 2>&1 || true
 
-.PHONY: all preset minimal build install clean
+.PHONY: preset extra all minimal build install clean
