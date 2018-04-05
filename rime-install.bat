@@ -21,9 +21,9 @@ set git_download_url=%git_download_url_prefix%v%git_version%.windows%git_release
 where /q bash
 if %errorlevel% equ 0 goto :bash_found
 
-if exist %TEMP%\%git_installer% (
+if exist %git_installer% (
+   set git_installer_path=.
    echo Found installer: %git_installer%
-   rem TODO: verify installer
    goto :install_git
 )
 
@@ -47,17 +47,19 @@ echo %git_download_url%
 exit /b 1
 
 :download_git
+set git_installer_path=%TEMP%
 echo Downloading installer: %git_installer%
-%downloader% %git_download_url% %save_to% %TEMP%\%git_installer%
-if not exist %TEMP%\%git_installer% (
-echo Error downloading %git_installer%
-exit /b 1
+%downloader% %git_download_url% %save_to% %git_installer_path%\%git_installer%
+if %errorlevel% neq 0 (
+   echo Error downloading %git_installer%
+   exit /b 1
 )
+rem TODO: verify installer
 echo Download complete: %git_installer%
 
 :install_git
 echo Installing git ...
-%TEMP%\%git_installer% /GitAndUnixToolsOnPath
+%git_installer_path%\%git_installer% /GitAndUnixToolsOnPath
 
 :bash_found
 
