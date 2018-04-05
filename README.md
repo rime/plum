@@ -163,6 +163,8 @@ bash rime-install --select
 bash rime-install --select :all lotem/rime-forge/lotem-packages.conf
 ```
 
+[Screenshot](https://github.com/rime/home/raw/master/images/rime-install-select.png) of usage example
+
 <a name="windows"></a>
 ## Windows bootstrap script
 
