@@ -1,7 +1,6 @@
 #!/bin/bash
 
 script_dir="$(dirname "$0")"
-root_dir="$(dirname "${script_dir}")"
 target="$1"
 output_dir="$2"
 
@@ -28,7 +27,7 @@ install_package() {
     local branch="$(resolve_branch "$1")"
     local package="${1%@*}"
     local branch_label="${branch:+@${branch}}"
-    local package_dir="${root_dir}/package/${user_name}/${package_name}"
+    local package_dir="${root_dir:-.}/package/${user_name}/${package_name}"
     if ! [[ -d "${package_dir}" ]]; then
         echo $(info 'Downloading package:') $(highlight "${package}") $(print_option "${branch_label}")
         local fetch_options=()

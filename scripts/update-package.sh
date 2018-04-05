@@ -1,7 +1,6 @@
 #!/bin/bash
 
 script_dir="$(dirname "$0")"
-root_dir="$(dirname "${script_dir}")"
 package_dir="$1"
 branch="$2"
 

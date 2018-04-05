@@ -17,7 +17,8 @@ if ! [[ -e "${plum_dir}" ]]; then
     git clone --depth 1 "https://github.com/${plum_repo}.git" "${plum_dir}"
 fi
 
-source "${plum_dir}"/scripts/bootstrap.sh
+export root_dir="${plum_dir}"
+source "${root_dir}"/scripts/bootstrap.sh
 require 'styles'
 
 if [[ -z "${rime_dir}" ]]; then
@@ -39,5 +40,5 @@ for target in ${targets[@]}; do
         continue
     fi
 
-    bash "${plum_dir}"/scripts/install-packages.sh "${target}" "${rime_dir:-.}"
+    "${root_dir}"/scripts/install-packages.sh "${target}" "${rime_dir:-.}"
 done
