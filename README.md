@@ -152,6 +152,17 @@ To update /plum/ itself, run
 bash rime-install plum
 ```
 
+## Interactively select packages to install
+
+Specify the `--select` flag as the first argument to `rime-install`;
+optionally add configurations (`:preset` is the default) and individual packages to the displayed menu.
+
+```sh
+bash rime-install --select
+
+bash rime-install --select :all lotem/rime-forge/lotem-packages.conf
+```
+
 <a name="windows"></a>
 ## Windows bootstrap script
 
