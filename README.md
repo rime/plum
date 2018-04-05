@@ -154,11 +154,11 @@ bash rime-install plum
 
 ## Interactively select packages to install
 
-Specify the `--select` flag as the first argument to `rime-install`;
-optionally add configurations (`:preset` is the default) and individual packages to the displayed menu.
+Specify the `--select` flag as the first argument to `rime-install`,
+then add configurations (`:preset` is the default) and/or individual packages to display in the menu.
 
 ```sh
-bash rime-install --select
+bash rime-install --select :extra
 
 bash rime-install --select :all lotem/rime-forge/lotem-packages.conf
 ```
