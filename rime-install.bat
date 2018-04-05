@@ -21,7 +21,7 @@ set git_download_url=%git_download_url_prefix%v%git_version%.windows%git_release
 where /q bash
 if %errorlevel% equ 0 goto :bash_found
 
-if exist %git_installer% (
+if exist %TEMP%\%git_installer% (
    echo Found installer: %git_installer%
    rem TODO: verify installer
    goto :install_git
@@ -48,8 +48,8 @@ exit /b 1
 
 :download_git
 echo Downloading installer: %git_installer%
-%downloader% %git_download_url% %save_to% %git_installer%
-if not exist %git_installer% (
+%downloader% %git_download_url% %save_to% %TEMP%\%git_installer%
+if not exist %TEMP%\%git_installer% (
 echo Error downloading %git_installer%
 exit /b 1
 )
@@ -57,11 +57,11 @@ echo Download complete: %git_installer%
 
 :install_git
 echo Installing git ...
-%git_installer% /GitAndUnixToolsOnPath
+%TEMP%\%git_installer% /GitAndUnixToolsOnPath
 
 :bash_found
 
-set PATH=%ProgramFiles%\Git\cmd;%ProgramFiles%\Git\mingw%arch%\bin;%ProgramFiles%\Git\usr\bin;%PATH%
+set PATH=%ProgramFiles%\Git\cmd;%ProgramFiles%\Git\mingw%arch%\bin;%ProgramFiles%\Git\usr\bin;%ProgramW6432%\Git\cmd;%ProgramW6432%\Git\mingw%arch%\bin;%ProgramW6432%\Git\usr\bin;%PATH%
 rem path
 
 if not defined plum_dir (
