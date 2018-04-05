@@ -2,9 +2,12 @@
 
 setlocal
 
+set config_file=%~dp0\rime-install-config.bat
+if exist %config_file% call %config_file%
+
 rem check for updates at https://github.com/git-for-windows/git/releases/latest
-set git_version=2.16.3
-set git_release=.1
+if not defined git_version set git_version=2.16.3
+if not defined git_release set git_release=.1
 
 if defined ProgramFiles(x86) (set arch=64) else (set arch=32)
 
