@@ -75,12 +75,12 @@ set PATH=%ProgramFiles%\Git\cmd;^
 %PATH%
 rem path
 
-if defined plum_dir (
+if exist "%plum_dir%"/rime-install (
    bash "%plum_dir%"/rime-install %*
 ) else if exist plum/rime-install (
-   bash plum/rime-install %*
+  bash plum/rime-install %*
 ) else if exist rime-install (
-   bash rime-install %*
+  bash rime-install %*
 ) else (
   echo Downloading rime-install ...
   curl -fsSL https://git.io/rime-install | bash -s -- %*
