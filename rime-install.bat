@@ -63,7 +63,13 @@ echo Installing git ...
 
 :bash_found
 
-set PATH=%ProgramFiles%\Git\cmd;%ProgramFiles%\Git\mingw%arch%\bin;%ProgramFiles%\Git\usr\bin;%ProgramW6432%\Git\cmd;%ProgramW6432%\Git\mingw%arch%\bin;%ProgramW6432%\Git\usr\bin;%PATH%
+set PATH=%ProgramFiles%\Git\cmd;^
+%ProgramFiles%\Git\mingw%arch%\bin;^
+%ProgramFiles%\Git\usr\bin;^
+%ProgramW6432%\Git\cmd;^
+%ProgramW6432%\Git\mingw%arch%\bin;^
+%ProgramW6432%\Git\usr\bin;^
+%PATH%
 rem path
 
 if defined plum_dir (
