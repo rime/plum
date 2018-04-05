@@ -60,7 +60,7 @@ load_package_list_from_target() {
             source "${target}"
             ;;
         :*)
-            source "${root_dir}/${target#:}"-packages.conf
+            source "${root_dir:-.}/${target#:}"-packages.conf
             ;;
         *)
             package_list=("${target}")

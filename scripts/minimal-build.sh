@@ -2,7 +2,6 @@
 # encoding: utf-8
 
 script_dir="$(dirname "$0")"
-root_dir="$(dirname "${script_dir}")"
 output_dir="$1"
 
 for package in essay luna-pinyin prelude; do
