@@ -57,12 +57,16 @@ error() {
   echo -e "${bold_red}$@${reset}"
 }
 
+prompt() {
+  echo -e "${bold_green}$@${reset}"
+}
+
 print_item() {
   echo -e "${cyan}$@${reset}"
 }
 
 print_option() {
-  echo -e "${magenta}$@${reset}"
+  echo -e "${bold_magenta}$@${reset}"
 }
 
 print_result() {

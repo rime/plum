@@ -27,10 +27,21 @@ if [[ -z "${rime_dir}" ]]; then
     guess_rime_user_dir  # exports `rime_dir`
 fi
 
+if [[ "$1" == '--select' ]]; then
+    shift
+    interactive=1
+fi
+
 if [[ $# -eq 0 ]]; then
     targets=(':preset')
 else
     targets=$@
+fi
+
+if [[ -n "${interactive}" ]]; then
+    require 'selector'
+    select_packages ${targets[@]}
+    targets=(${selected_packages[@]})
 fi
 
 for target in ${targets[@]}; do
