@@ -66,12 +66,12 @@ echo Installing git ...
 set PATH=%ProgramFiles%\Git\cmd;%ProgramFiles%\Git\mingw%arch%\bin;%ProgramFiles%\Git\usr\bin;%ProgramW6432%\Git\cmd;%ProgramW6432%\Git\mingw%arch%\bin;%ProgramW6432%\Git\usr\bin;%PATH%
 rem path
 
-if not defined plum_dir (
-   set plum_dir=plum
-)
-
-if exist "%plum_dir%"/rime-install (
+if defined plum_dir (
    bash "%plum_dir%"/rime-install %*
+) else if exist plum/rime-install (
+   bash plum/rime-install %*
+) else if exist rime-install (
+   bash rime-install %*
 ) else (
   echo Downloading rime-install ...
   curl -fsSL https://git.io/rime-install | bash -s -- %*
