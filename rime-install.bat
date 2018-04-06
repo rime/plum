@@ -3,7 +3,7 @@
 setlocal
 
 set config_file=%~dp0\rime-install-config.bat
-if exist %config_file% call %config_file%
+if exist "%config_file%" call "%config_file%"
 
 rem check for updates at https://github.com/git-for-windows/git/releases/latest
 if not defined git_version set git_version=2.16.3
