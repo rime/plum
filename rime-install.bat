@@ -2,6 +2,8 @@
 
 setlocal
 
+title Plum Windows bootstrap script
+
 set config_file=%~dp0\rime-install-config.bat
 if exist "%config_file%" call "%config_file%"
 
@@ -85,3 +87,5 @@ if exist "%plum_dir%"/rime-install (
   echo Downloading rime-install ...
   curl -fsSL https://git.io/rime-install | bash -s -- %*
 )
+
+exit /b
