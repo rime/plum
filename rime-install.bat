@@ -85,7 +85,12 @@ if exist "%plum_dir%"/rime-install (
   bash rime-install %*
 ) else (
   echo Downloading rime-install ...
-  curl -fsSL https://git.io/rime-install | bash -s -- %*
+  curl -fsSL https://git.io/rime-install -o "%TEMP%"/rime-install
+  if errorlevel 1 (
+    echo Error downloading rime-install
+    exit /b 1
+  )
+  bash "%TEMP%"/rime-install %*
 )
 
 exit /b
