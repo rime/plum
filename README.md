@@ -18,13 +18,19 @@ of data packages maintained by [Rime Developers](https://github.com/rime).
 It also works perfectly well with personal configuration hosted on GitHub and input schema packages
 from third-party developers.
 
-A **Rime input schema** defines the rules of a specific "input method", or in technical terms
+A **Rime input schema** (**Rime 輸入方案**) defines the rules of a specific "input method", or in technical terms
 how user input sequences are interpreted by the Rime input method engine.
 It consists of a configuration file named `<schema_id>.schema.yaml`, and usually an optional
-**Rime dictionary** file named `*.dict.yaml`.
+**Rime dictionary** (**韻書**) file named `*.dict.yaml`.
 
 A package may contain one or several interrelated input schemata and their affiliated Rime dictionaries.
-A package is also good for publishing general configuration files and data files that are used by Rime.
+A package is also good for publishing general configuration files and data files used by Rime.
+
+In /plum/ terms, a re-usable piece of configuration is known as a **recipe** (**配方**), denoted by the "℞" symbol.
+
+A data package itself can be a recipe, this is the common case.
+In the future, /plum/ will support more fine-grained recipes that allow you to select what to install from a package,
+or even take parameters like the target input schema to customize.
 
 ## Packages
 
@@ -35,47 +41,47 @@ Chinese input methods including those based on modern dialects and historical Ch
 
 ### Essentials
 
-  - [`prelude`](https://github.com/rime/rime-prelude): the prelude package, providing Rime's default settings
-  - [`essay`](https://github.com/rime/rime-essay): 八股文 / a shared vocabulary and language model
+  - ℞ [`prelude`](https://github.com/rime/rime-prelude): 基礎配置 / the prelude package, providing Rime's default settings
+  - ℞ [`essay`](https://github.com/rime/rime-essay): 八股文 / a shared vocabulary and language model
 
 ### Phonetic-based input methods
 
 Modern Standard Madarin
 
-  - [`luna-pinyin`](https://github.com/rime/rime-luna-pinyin): 朙月拼音 / Pinyin input method for Tranditional Chinese
-  - [`terra-pinyin`](https://github.com/rime/rime-terra-pinyin): 地球拼音 / School-taught Pinyin, with tone marks
-  - [`bopomofo`](https://github.com/rime/rime-bopomofo): 注音 / Zhuyin (aka. Bopomofo)
-  - [`pinyin-simp`](https://github.com/rime/rime-pinyin-simp): 袖珍簡化字拼音
+  - ℞ [`luna-pinyin`](https://github.com/rime/rime-luna-pinyin): 朙月拼音 / Pinyin input method for Tranditional Chinese
+  - ℞ [`terra-pinyin`](https://github.com/rime/rime-terra-pinyin): 地球拼音 / School-taught Pinyin, with tone marks
+  - ℞ [`bopomofo`](https://github.com/rime/rime-bopomofo): 注音 / Zhuyin (aka. Bopomofo)
+  - ℞ [`pinyin-simp`](https://github.com/rime/rime-pinyin-simp): 袖珍簡化字拼音
 
 Derivatives of Pinyin
 
-  - [`double-pinyin`](https://github.com/rime/rime-double-pinyin): 雙拼 / Double Pinyin (ZiRanMa, ABC, flyPY, MSPY, PYJJ variants)
-  - [`combo-pinyin`](https://github.com/rime/rime-combo-pinyin): 宮保拼音 / [Combo Pinyin](https://github.com/rime/home/wiki/ComboPinyin), a chord-typing input method
-  - [`stenotype`](https://github.com/rime/rime-stenotype): 打字速記法 / a stenographic system derived from ABC Easy Shorthand
+  - ℞ [`double-pinyin`](https://github.com/rime/rime-double-pinyin): 雙拼 / Double Pinyin (ZiRanMa, ABC, flyPY, MSPY, PYJJ variants)
+  - ℞ [`combo-pinyin`](https://github.com/rime/rime-combo-pinyin): 宮保拼音 / [Combo Pinyin](https://github.com/rime/home/wiki/ComboPinyin), a chord-typing input method
+  - ℞ [`stenotype`](https://github.com/rime/rime-stenotype): 打字速記法 / a stenographic system derived from ABC Easy Shorthand
 
 Other modern varieties of Chinese
 
-  - [`jyutping`](https://github.com/rime/rime-jyutping): 粵拼 / Cantonese
-  - [`wugniu`](https://github.com/rime/rime-wugniu): 上海吳語 / Wu (Shanghainese)
-  - [`soutzoe`](https://github.com/rime/rime-soutzoe): 蘇州吳語 / Wu (Suzhounese)
+  - ℞ [`jyutping`](https://github.com/rime/rime-jyutping): 粵拼 / Cantonese
+  - ℞ [`wugniu`](https://github.com/rime/rime-wugniu): 上海吳語 / Wu (Shanghainese)
+  - ℞ [`soutzoe`](https://github.com/rime/rime-soutzoe): 蘇州吳語 / Wu (Suzhounese)
 
 Middle Chinese
 
-  - [`middle-chinese`](https://github.com/rime/rime-middle-chinese): 中古漢語拼音 / Middle Chinese Romanization
+  - ℞ [`middle-chinese`](https://github.com/rime/rime-middle-chinese): 中古漢語拼音 / Middle Chinese Romanization
 
 ### Shape-based input methods
 
-  - [`stroke`](https://github.com/rime/rime-stroke): 五筆畫 / five strokes
-  - [`cangjie`](https://github.com/rime/rime-cangjie): 倉頡輸入法 / Cangjie input method
-  - [`quick`](https://github.com/rime/rime-quick): 速成 / Simplified Cangjie
-  - [`wubi`](https://github.com/rime/rime-wubi): 五筆字型
-  - [`array`](https://github.com/rime/rime-array): 行列輸入法
-  - [`scj`](https://github.com/rime/rime-scj): 快速倉頡
+  - ℞ [`stroke`](https://github.com/rime/rime-stroke): 五筆畫 / five strokes
+  - ℞ [`cangjie`](https://github.com/rime/rime-cangjie): 倉頡輸入法 / Cangjie input method
+  - ℞ [`quick`](https://github.com/rime/rime-quick): 速成 / Simplified Cangjie
+  - ℞ [`wubi`](https://github.com/rime/rime-wubi): 五筆字型
+  - ℞ [`array`](https://github.com/rime/rime-array): 行列輸入法
+  - ℞ [`scj`](https://github.com/rime/rime-scj): 快速倉頡
 
 ### Miscelaneous
 
-  - [`emoji`](https://github.com/rime/rime-emoji): 繪文字 / input emoji with English or Chinese Pinyin keywords
-  - [`ipa`](https://github.com/rime/rime-ipa): 國際音標 / International Phonetic Alphabet
+  - ℞ [`emoji`](https://github.com/rime/rime-emoji): 繪文字 / input emoji with English or Chinese Pinyin keywords
+  - ℞ [`ipa`](https://github.com/rime/rime-ipa): 國際音標 / International Phonetic Alphabet
 
 ## Usage
 
