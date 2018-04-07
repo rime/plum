@@ -194,7 +194,7 @@ In China, it's probably faster to download Git from a local mirror. Use the foll
 (set git_mirror=taobao) && rime-install
 ```
 
-/// Windows 用家可以通過 [小狼毫](http://rime.im/download/#windows) 0.11 以上「輸入法設定」「獲取更多方案」調用配置管理器。///
+/// Windows 用家可以通過 [小狼毫](http://rime.im/download/#windows) 0.11 以上「輸入法設定／獲取更多輸入方案」調用配置管理器。///
 
 /// 或者下載 [引導批處理文件](https://git.io/rime-install.bat)，在下載位置通過命令行（cmd）運行以上命令。///
 
