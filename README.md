@@ -12,6 +12,8 @@ Rime configuration manager and input schema repository
 
 **/plum/** is a configuration manager for [Rime](http://rime.im) input method engine.
 
+/// **東風破** 是 [中州韻輸入法引擎](http://rime.im) 的配置管理工具。///
+
 It's designed for Rime users to install and update the default configuration and a collection
 of data packages maintained by [Rime Developers](https://github.com/rime).
 
@@ -38,6 +40,8 @@ This is an index of the packages maintained by Rime Developers as separate proje
 
 These packages aim to offer a sensible default configuration for most users, and support various
 Chinese input methods including those based on modern dialects and historical Chinese phonology.
+
+/// **配方一覽** ///
 
 ### Essentials
 
@@ -92,6 +96,8 @@ To prepare your Rime configuration for [ibus-rime](https://github.com/rime/ibus-
 ```sh
 curl -fsSL https://git.io/rime-install | bash
 ```
+
+/// 用法：*nix 系統在終端輸入以上命令行，安裝配置管理器及預設配方 ///
 
 *Mac users:* open `Terminal.app`, paste the command into the terminal and hit enter;
 
@@ -188,6 +194,10 @@ In China, it's probably faster to download Git from a local mirror. Use the foll
 (set git_mirror=taobao) && rime-install
 ```
 
+/// Windows 用家可以通過 [小狼毫](http://rime.im/download/#windows) 0.11 以上「輸入法設定」「獲取更多方案」調用配置管理器。///
+
+/// 或者下載 [引導批處理文件](https://git.io/rime-install.bat)，在下載位置通過命令行（cmd）運行以上命令。///
+
 Next time, to re-install or update the preset configuration, you can just double-click `rime-install.bat`.
 
 You can also set options and/or specify packages to install, for example:
@@ -197,6 +207,8 @@ set no_update=1
 set rime_frontend=weasel
 rime-install :preset combo-pinyin jyutping wubi
 ```
+
+/// `rime-install` 可指定所需配方爲命令參數。///
 
 ## Install as shared data
 
