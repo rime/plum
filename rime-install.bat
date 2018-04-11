@@ -30,7 +30,7 @@ set PATH=%search_path%;%PATH%
 rem path
 
 rem check for updates at https://github.com/git-for-windows/git/releases/latest
-if not defined git_version set git_version=2.16.3
+if not defined git_version set git_version=2.17.0
 if not defined git_release set git_release=.1
 
 set git_installer=Git-%git_version%%git_release:.1=%-%arch%-bit.exe
