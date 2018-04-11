@@ -7,11 +7,21 @@ title Plum Windows bootstrap script
 set config_file=%~dp0\rime-install-config.bat
 if exist "%config_file%" call "%config_file%"
 
+if defined ProgramFiles(x86) (set arch=64) else (set arch=32)
+
+set PATH=%~dp0;^
+%ProgramFiles%\Git\cmd;^
+%ProgramFiles%\Git\mingw%arch%\bin;^
+%ProgramFiles%\Git\usr\bin;^
+%ProgramW6432%\Git\cmd;^
+%ProgramW6432%\Git\mingw%arch%\bin;^
+%ProgramW6432%\Git\usr\bin;^
+%PATH%
+rem path
+
 rem check for updates at https://github.com/git-for-windows/git/releases/latest
 if not defined git_version set git_version=2.16.3
 if not defined git_release set git_release=.1
-
-if defined ProgramFiles(x86) (set arch=64) else (set arch=32)
 
 set git_installer=Git-%git_version%%git_release:.1=%-%arch%-bit.exe
 
@@ -67,15 +77,6 @@ echo Installing git ...
 %git_installer_path%\%git_installer% /GitAndUnixToolsOnPath
 
 :bash_found
-
-set PATH=%ProgramFiles%\Git\cmd;^
-%ProgramFiles%\Git\mingw%arch%\bin;^
-%ProgramFiles%\Git\usr\bin;^
-%ProgramW6432%\Git\cmd;^
-%ProgramW6432%\Git\mingw%arch%\bin;^
-%ProgramW6432%\Git\usr\bin;^
-%PATH%
-rem path
 
 if exist "%plum_dir%"/rime-install (
    bash "%plum_dir%"/rime-install %*
