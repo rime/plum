@@ -85,7 +85,7 @@ echo Download complete: %git_installer%
 
 :install_git
 echo Installing git ...
-%git_installer_path%%git_installer% /SILENT /GitAndUnixToolsOnPath
+%git_installer_path%%git_installer% /SILENT
 
 :bash_found
 
