@@ -9,7 +9,7 @@ if exist "%config_file%" call "%config_file%"
 
 if defined ProgramFiles(x86) (set arch=64) else (set arch=32)
 
-set search_path==%~dp0;^
+set search_path=%~dp0;^
 %ProgramFiles%\Git\cmd;^
 %ProgramFiles%\Git\mingw%arch%\bin;^
 %ProgramFiles%\Git\usr\bin;
