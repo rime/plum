@@ -9,14 +9,24 @@ if exist "%config_file%" call "%config_file%"
 
 if defined ProgramFiles(x86) (set arch=64) else (set arch=32)
 
-set PATH=%~dp0;^
+set search_path==%~dp0;^
 %ProgramFiles%\Git\cmd;^
 %ProgramFiles%\Git\mingw%arch%\bin;^
-%ProgramFiles%\Git\usr\bin;^
+%ProgramFiles%\Git\usr\bin;
+
+rem find 64-bit Git in 32-bit cmd.exe
+if defined ProgramW6432 set search_path=%search_path%^
 %ProgramW6432%\Git\cmd;^
 %ProgramW6432%\Git\mingw%arch%\bin;^
-%ProgramW6432%\Git\usr\bin;^
-%PATH%
+%ProgramW6432%\Git\usr\bin;
+
+rem find user installed 32-bit Git on 64-bit OS
+if defined ProgramFiles(x86) set search_path=%search_path%^
+%ProgramFiles(x86)%\Git\cmd;^
+%ProgramFiles(x86)%\Git\mingw32\bin;^
+%ProgramFiles(x86)%\Git\usr\bin;
+
+set PATH=%search_path%;%PATH%
 rem path
 
 rem check for updates at https://github.com/git-for-windows/git/releases/latest
