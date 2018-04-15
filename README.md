@@ -106,7 +106,7 @@ curl -fsSL https://git.io/rime-install | bash
 The one-liner runs the `rime-install` script to download preset packages and install
 source files to Rime user directory. (Yet it doesn't enable new schemas for you)
 
-## Advanced Usage
+## Advanced usage
 
 Alternatively, you can specify a configuration among `:preset`, `:extra` and `:all` (note the colon):
 
@@ -180,35 +180,55 @@ bash rime-install --select :all lotem/rime-forge/lotem-packages.conf
 <a name="windows"></a>
 ## Windows bootstrap script
 
-To get started on Windows, download <https://git.io/rime-install.bat>
+To get started on Windows, download the bootstrap bundle (TODO: add download link).
 
-Open a Command Prompt window from Start Menu (or press `Win+R`, type `cmd`, press enter),
-`cd` to the download directory and run `rime-install.bat`.
+Unpack the ZIP archive, run `rime-install-bootstrap.bat` for initial setup.
 
-If [Git for Windows](https://gitforwindows.org/) is not installed or not available in your `PATH`,
-the script first tries to download and install it for you.
-
-In China, it's probably faster to download Git from a local mirror. Use the following command instead:
-
-```batch
-(set git_mirror=taobao) && rime-install
-```
+It will fetch the latest installer script `rime-install.bat` an create a shortcut to it,
+which can then be copyed or moved anywhere for easier access.
 
 /// Windows 用家可以通過 [小狼毫](http://rime.im/download/#windows) 0.11 以上「輸入法設定／獲取更多輸入方案」調用配置管理器。///
 
-/// 或者下載 [引導批處理文件](https://git.io/rime-install.bat)，在下載位置通過命令行（cmd）運行以上命令。///
+/// 或者下載獨立的啓動工具包。///
 
-Next time, to re-install or update the preset configuration, you can just double-click `rime-install.bat`.
+### Use built-in ZIP package installer
 
-You can also set options and/or specify packages to install, for example:
+You can use the installer script to download and install ZIP packages from GitHub, in a number of ways:
+
+1. Double-click the shortcut to bring up an interactive package installer, then input package name, `<user>/<repo>` or GitHub URL for the package.
+
+2. Run `rime-install.bat` in the command line. The command takes a list of packages to install as arguments.
 
 ```batch
-set no_update=1
-set rime_frontend=weasel
 rime-install :preset combo-pinyin jyutping wubi
 ```
 
-/// `rime-install` 可指定所需配方爲命令參數。///
+3. Drag downloaded ZIP packages from GitHub onto the shortcut to do offline install.
+
+   You can find ZIP packages downloaded by the installer script in `%TEMP%` folder (can be customized via variable `download_cache_dir`).
+
+   To manually download ZIP package from a GitHub repository, click the button *Clone or download*, then *Download ZIP*.
+
+### Use git for incremental updates (optional)
+
+If [Git for Windows](https://gitforwindows.org/) is installed in the default location or is available in your `PATH`,
+the script will use git-bash to install or update packages.
+
+Use the following command to install Git for Windows, if you are new to git.
+In China, it's probably faster to download Git from a local mirror by specifying `git_mirror`.
+
+```batch
+(set git_mirror=taobao) && rime-install git
+```
+
+You can set more options in `rime-install-config.bat` in the same directory as `rime-install.bat`, for example:
+
+```batch
+set git_mirror=taobao
+set plum_dir=%APPDATA%\plum
+set rime_dir=%APPDATA%\Rime
+set use_plum=1
+```
 
 ## Install as shared data
 
