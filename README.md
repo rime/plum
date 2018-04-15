@@ -90,21 +90,20 @@ Middle Chinese
 ## Usage
 
 To prepare your Rime configuration for [ibus-rime](https://github.com/rime/ibus-rime),
-[Squirrel](https://github.com/rime/squirrel) or
-[Weasel](https://github.com/rime/weasel), you can get started by running
+[Squirrel](https://github.com/rime/squirrel), you can get started by running
 
 ```sh
 curl -fsSL https://git.io/rime-install | bash
 ```
 
-/// 用法：*nix 系統在終端輸入以上命令行，安裝配置管理器及預設配方 ///
+/// 用法：Linux、macOS 系統，在終端輸入以上命令行，安裝配置管理器及預設配方。 ///
 
-*Mac users:* open `Terminal.app`, paste the command into the terminal and hit enter;
-
-*Windows users:* please refer to the [Windows bootstrap script](#windows) section for initial setup.
+Paste the command line in Linux terminal or macOS `Terminal.app` and hit enter.
 
 The one-liner runs the `rime-install` script to download preset packages and install
 source files to Rime user directory. (Yet it doesn't enable new schemas for you)
+
+For [Weasel](https://github.com/rime/weasel), please refer to the [Windows bootstrap script](#windows) section for initial setup.
 
 ## Advanced usage
 
@@ -180,16 +179,17 @@ bash rime-install --select :all lotem/rime-forge/lotem-packages.conf
 <a name="windows"></a>
 ## Windows bootstrap script
 
-To get started on Windows, download the bootstrap bundle (TODO: add download link).
-
-Unpack the ZIP archive, run `rime-install-bootstrap.bat` for initial setup.
+To get started on Windows, download the [bootstrap bundle][bootstrap-bundle],
+unpack the ZIP archive and run `rime-install-bootstrap.bat` for initial setup.
 
 It will fetch the latest installer script `rime-install.bat` an create a shortcut to it,
-which can then be copyed or moved anywhere for easier access.
+which can then be copied or moved anywhere for easier access.
 
 /// Windows 用家可以通過 [小狼毫](http://rime.im/download/#windows) 0.11 以上「輸入法設定／獲取更多輸入方案」調用配置管理器。///
 
-/// 或者下載獨立的啓動工具包。///
+/// 或者下載獨立的 [啓動工具包][bootstrap-bundle]。///
+
+  [bootstrap-bundle]: https://github.com/rime/plum-windows-bootstrap/archive/master.zip
 
 ### Use built-in ZIP package installer
 
