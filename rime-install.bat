@@ -141,6 +141,13 @@ if errorlevel 1 (
   set error_message=Error unpacking package %package_file%
   goto error
 )
+if not exist "%rime_dir%" (
+  mkdir "%rime_dir%"
+  if errorlevel 1 (
+    set error_message=Error creating rime user directory: %rime_dir%
+    goto error
+  )
+)
 rem install files from the unzipped package
 for %%f in ("%unpack_package_dir%\*.yaml" "%unpack_package_dir%\*.txt") do (
   echo.
