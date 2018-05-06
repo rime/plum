@@ -82,7 +82,7 @@ Middle Chinese
   - ℞ [`array`](https://github.com/rime/rime-array): 行列輸入法
   - ℞ [`scj`](https://github.com/rime/rime-scj): 快速倉頡
 
-### Miscelaneous
+### Miscellaneous
 
   - ℞ [`emoji`](https://github.com/rime/rime-emoji): 繪文字 / input emoji with English or Chinese Pinyin keywords
   - ℞ [`ipa`](https://github.com/rime/rime-ipa): 國際音標 / International Phonetic Alphabet
