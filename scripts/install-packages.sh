@@ -50,26 +50,39 @@ install_files_from_package() {
     local package_dir="$1"
     local IFS=$'\r\n'
     local data_files=(
-        $(ls "${package_dir}"/*.* | grep -e '\.txt$' -e '\.yaml$')
+        $(
+            cd "${package_dir}"
+            ls *.* 2> /dev/null | grep -e '\.txt$' -e '\.yaml$'
+            ls opencc/*.* 2> /dev/null | grep -e '\.json$' -e '\.ocd$' -e '\.txt$'
+        )
     )
     if [[ "${#data_files[@]}" -eq 0 ]]; then
         return
     fi
-    local file_name
-    local target_file
-    for data_file in "${data_files[@]}"; do
-        file_name="$(basename "${data_file}")"
-        target_file="${output_dir}/${file_name}"
-        if ! [ -e "${target_file}" ]; then
-            echo $(info 'Installing:') $(print_item "${file_name}")
-        elif ! diff -q "${data_file}" "${target_file}" &> /dev/null; then
-            echo $(info 'Updating:') $(print_item "${file_name}")
+    local source_path
+    local target_path
+    for file in "${data_files[@]}"; do
+        source_path="${package_dir}/${file}"
+        target_path="${output_dir}/${file}"
+        if ! [ -e "${target_path}" ]; then
+            create_containing_directory "${target_path}"
+            echo $(info 'Installing:') $(print_item "${file}")
+        elif ! diff -q "${source_path}" "${target_path}" &> /dev/null; then
+            echo $(info 'Updating:') $(print_item "${file}")
         else
             continue
         fi
-        cp "${data_file}" "${target_file}"
+        cp "${source_path}" "${target_path}"
         ((++files_updated))
     done
+}
+
+create_containing_directory() {
+    local target_dir="$(dirname "$1")"
+    if ! [ -d "${target_dir}" ]; then
+        echo $(info 'Creating directory:') $(print_item "${target_dir}")
+        mkdir -p "${target_dir}"
+    fi
 }
 
 load_package_list_from_target "${target}"
