@@ -149,16 +149,28 @@ if not exist "%rime_dir%" (
   )
 )
 rem install files from the unzipped package
-for %%f in ("%unpack_package_dir%\*.yaml" "%unpack_package_dir%\*.txt") do (
+pushd "%unpack_package_dir%"
+for %%f in (
+    *.yaml
+    *.txt
+    opencc\*.json
+    opencc\*.ocd
+    opencc\*.txt
+) do (
   echo.
-  echo Installing %%~nxf ...
+  echo Installing %%f ...
   echo.
-  copy /y "%%f" "%rime_dir%\%%~nxf"
+  set target_file=%rime_dir%\%%f
+  for %%t in (!target_file!) do set target_dir=%%~dpt
+  if not exist "!target_dir!" mkdir "!target_dir!"
+  copy /y "%%f" "!target_file!"
   if errorlevel 1 (
+    popd
     set error_message=Error installing files from package %package%
     goto error
   )
 )
+popd
 exit /b
 
 :install_package_group
