@@ -26,11 +26,16 @@ minimal: clean
 
 build:
 	rime_deployer --build $(OUTPUT)
+	rm $(OUTPUT)/user.yaml
 
 install:
 	@echo "Installing Rime data to '$(DESTDIR)$(RIME_DATA_DIR)'."
 	@install -d $(DESTDIR)$(RIME_DATA_DIR)
 	@install -m 644 $(OUTPUT)/*.* $(DESTDIR)$(RIME_DATA_DIR)
+	@if [[ -d "$(OUTPUT)/build" ]]; then \
+	  install -d $(DESTDIR)$(RIME_DATA_DIR)/build; \
+	  install -m 644 $(OUTPUT)/build/*.* $(DESTDIR)$(RIME_DATA_DIR)/build; \
+	fi
 
 clean:
 	rm -rf $(OUTPUT) > /dev/null 2>&1 || true
