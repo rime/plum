@@ -1,28 +1,33 @@
 ifeq ($(SRCDIR),)
-	SRCDIR=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+	SRCDIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 endif
 
 # Tips: you can set OUTPUT to Rime user directory in the command line
 ifeq ($(OUTPUT),)
-	OUTPUT:=$(SRCDIR)/output
+	OUTPUT := $(SRCDIR)/output
 endif
 
 ifeq ($(PREFIX),)
-	PREFIX=/usr
+	PREFIX := /usr
 endif
 
 ifeq ($(RIME_DATA_DIR),)
-	RIME_DATA_DIR=$(PREFIX)/share/rime-data
+	RIME_DATA_DIR := $(PREFIX)/share/rime-data
 endif
+
+.DEFAULT_GOAL := preset
 
 preset extra all: clean
 	bash $(SRCDIR)/scripts/install-packages.sh :$@ $(OUTPUT)
-	@if [[ -n "$$build_bin" ]]; then \
-	  $(MAKE) build; \
-	fi
 
 minimal: clean
 	bash $(SRCDIR)/scripts/minimal-build.sh $(OUTPUT)
+
+preset-bin: preset build
+
+all-bin: all build
+
+minimal-bin: minimal build
 
 build:
 	rime_deployer --build $(OUTPUT)
@@ -57,4 +62,5 @@ dist:
 	  -C .. plum
 
 .PHONY: preset extra all minimal \
+	preset-bin all-bin minimal-bin \
 	build install clean dist

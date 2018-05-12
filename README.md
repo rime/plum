@@ -258,11 +258,11 @@ make
 sudo make install
 ```
 
-You can optionally build YAML files to binaries by setting the shell variable
-`build_bin`. This saves user's time building those files on first startup.
+You can optionally build the by default enabled input schemas to binaries.
+This saves user's time building those files on first startup.
 
 ```sh
-build_bin=1 make
+make preset-bin
 ```
 
 ## License
