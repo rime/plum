@@ -40,4 +40,21 @@ install:
 clean:
 	rm -rf $(OUTPUT) > /dev/null 2>&1 || true
 
-.PHONY: preset extra all minimal build install clean
+VERSION = $(shell date "+%Y%m%d")
+
+# A source tarball that includes all data packages.
+# To reproduce package contents of the release, set `no_update=1`:
+#     tar xzf plum-YYYYMMDD.tar.gz
+#     cd plum
+#     no_update=1 make
+#     sudo make install
+dist:
+	$(MAKE) OUTPUT=$(OUTPUT) all
+	tar czf plum-$(VERSION).tar.gz \
+	  --exclude=.git \
+	  --exclude=output \
+	  --exclude='plum-*.tar.gz' \
+	  -C .. plum
+
+.PHONY: preset extra all minimal \
+	build install clean dist
