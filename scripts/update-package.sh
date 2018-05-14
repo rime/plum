@@ -17,7 +17,7 @@ fi
 git_current_branch() {
     if ! command git rev-parse 2> /dev/null
     then
-        echo $(error 'ERROR:') "$(basename $0): not a repository: $PWD" >&2
+        # not a git repository
         return 2
     fi
     local ref="$(command git symbolic-ref HEAD 2> /dev/null)"
@@ -57,7 +57,8 @@ pushd "${package_dir}" &> /dev/null
 
 current_branch="$(git_current_branch)"
 if [[ $? -gt 1 ]]; then
-    exit 1
+    echo $(warning 'WARNING:') "not a git repository, skipped updating '${package_dir}'"
+    exit
 fi
 target_branch="${branch:-master}"
 if [[ "${current_branch}" != "${target_branch}" ]]; then
