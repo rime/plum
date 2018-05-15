@@ -64,7 +64,7 @@ target_branch="${branch:-master}"
 if [[ "${current_branch}" != "${target_branch}" ]]; then
     switch_branch "${target_branch}"
 elif [[ -z "${option_no_update}" ]]; then
-    git pull
+    git pull --recurse-submodules
 fi
 
 popd &> /dev/null
