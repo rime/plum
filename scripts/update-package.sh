@@ -64,7 +64,13 @@ target_branch="${branch:-master}"
 if [[ "${current_branch}" != "${target_branch}" ]]; then
     switch_branch "${target_branch}"
 elif [[ -z "${option_no_update}" ]]; then
-    git pull --recurse-submodules
+    git fetch --recurse-submodules && (
+        git merge --ff-only "origin/${target_branch}" || (
+            echo $(warning 'WARNING:') 'fast-forward failed;' \
+                 'doing a hard reset to' $(print_option "origin/${target_branch}")
+            git reset --hard "origin/${target_branch}"
+        )
+    ) || exit 1
 fi
 
 popd &> /dev/null
