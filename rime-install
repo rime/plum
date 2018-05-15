@@ -4,10 +4,14 @@ if [[ -z "${plum_repo}" ]]; then
     plum_repo='rime/plum'
 fi
 
+run_from_plum_dir=0
+
 if [[ -z "${plum_dir}" ]]; then
     # am I in a working copy already?
     plum_dir="$(dirname "$0")"
-    if ! [[ -f "${plum_dir}"/scripts/install-packages.sh ]]; then
+    if [[ -f "${plum_dir}"/scripts/install-packages.sh ]]; then
+        run_from_plum_dir=1
+    else
         # make a copy of plum in a subdirectory
         plum_dir='plum'
     fi
@@ -15,6 +19,12 @@ fi
 
 if ! [[ -e "${plum_dir}" ]]; then
     git clone --depth 1 "https://github.com/${plum_repo}.git" "${plum_dir}"
+fi
+
+if [[ "${run_from_plum_dir}" -eq 0 ]]; then
+    # run newer version of rime-install
+    "${plum_dir}"/rime-install "$@"
+    exit
 fi
 
 export root_dir="${plum_dir}"
