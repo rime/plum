@@ -24,4 +24,4 @@ resolve_package_name() {
 
 package_url="https://github.com/$(resolve_package_name "${package_name}").git"
 
-git clone --depth 1 --shallow-submodules "${package_url}" $@
+git clone --depth 1 --shallow-submodules "${package_url}" "$@"

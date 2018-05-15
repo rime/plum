@@ -7,11 +7,11 @@ select_packages() {
     local all_packages=()
     local target
     local package
-    for target in $@; do
-        load_package_list_from_target ${target}
+    for target in "$@"; do
+        load_package_list_from_target "${target}"
         for package in "${package_list[@]}"; do
             if ! (echo " ${all_packages[*]} " | grep -qF " ${package} "); then
-                all_packages+=(${package})
+                all_packages+=("${package}")
             fi
         done
     done
@@ -21,7 +21,7 @@ select_packages() {
     echo $(highlight 'Select packages to install:')
     select selected in "${all_packages[@]}"; do
         if [[ -n "${selected}" ]]; then
-            selected_packages+=(${selected})
+            selected_packages+=("${selected}")
         else
             case "$REPLY" in
                 end | ok | 0 | .)
@@ -55,7 +55,7 @@ select_packages() {
         read -p " $(prompt '[Y/n]') " answer
         case "${answer}" in
             '' | y*)
-                selected_packages=($@)
+                selected_packages=("$@")
                 ;;
             *)
                 echo $(warning 'Installation canceled.')

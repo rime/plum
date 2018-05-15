@@ -45,16 +45,16 @@ fi
 if [[ $# -eq 0 ]]; then
     targets=(':preset')
 else
-    targets=$@
+    targets=("$@")
 fi
 
 if [[ -n "${interactive}" ]]; then
     require 'selector'
-    select_packages ${targets[@]}
-    targets=(${selected_packages[@]})
+    select_packages "${targets[@]}"
+    targets=("${selected_packages[@]}")
 fi
 
-for target in ${targets[@]}; do
+for target in "${targets[@]}"; do
     if [[ "${target}" == 'plum' ]]; then
         echo $(print_result 'Updating plum at') "'${plum_dir}'"
         (cd "${plum_dir}"; git pull)
