@@ -24,4 +24,30 @@ resolve_package_name() {
 
 package_url="https://github.com/$(resolve_package_name "${package_name}").git"
 
-git clone --depth 1 --shallow-submodules "${package_url}" "$@"
+git_version_greater_or_equal() {
+    local target_major="$1"
+    local target_minor="$2"
+    local git_version_pattern='^git version ([0-9]*)\.([0-9]*).*$'
+    if [[ "$(git --version | grep '^git version')" =~ $git_version_pattern ]]; then
+        local major="${BASH_REMATCH[1]}"
+        local minor="${BASH_REMATCH[2]}"
+        [[ "${major}" -gt "${target_major}" ]] || (
+            [[ "${major}" -eq "${target_major}" ]] && [[ "${minor}" -ge "${target_minor}" ]]
+        )
+    else
+        return 1
+    fi
+}
+
+clone_options=(
+    --depth 1
+    --recurse-submodules
+)
+
+if git_version_greater_or_equal 2 9; then
+    clone_options+=(
+        --shallow-submodules
+    )
+fi
+
+git clone ${clone_options[@]} "${package_url}" "$@"
