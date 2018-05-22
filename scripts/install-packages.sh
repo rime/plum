@@ -38,10 +38,10 @@ install_package() {
     else
         if [[ -z "${option_no_update}" ]]; then
             echo $(info 'Updating package:') $(highlight "${package}")
+            "${script_dir}"/update-package.sh "${package_dir}" "${branch}"
         else
             echo $(info 'Found package:') $(highlight "${package}")
         fi
-        "${script_dir}"/update-package.sh "${package_dir}" "${branch}"
     fi
     install_files_from_package "${package_dir}"
 }
