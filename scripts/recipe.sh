@@ -80,7 +80,7 @@ eval \${recipe_options[@]}
                 /<<EOF/ i\
                 EOF
             }
-            $ i\
+            $ a\
             EOF
         }' | bash || (
         echo $(error 'Error:') "failed to patch files in recipe :${recipe}"
