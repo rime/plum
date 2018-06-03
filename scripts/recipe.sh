@@ -17,26 +17,63 @@ install_recipe() {
     # TODO: assert recipe/Rx is same as ${recipe}
     # TODO: apply default values and check recipe/args
 
-    # TODO: install_files
+    apply_install_files
 
-    patch_files
+    apply_patch_files
 }
 
-patch_files() {
+print_section() {
+    local section="$1"
+    sed -n '/^'"${section}"':/,/^[^[:space:]#]/ {
+        /^[^[:space:]#]/ !p
+    }'
+}
+
+apply_install_files() {
+    if ! grep -q '^install_files:' "${recipe_file}"; then
+        return
+    fi
+    local file_patterns=(
+        $(cat "${recipe_file}" |
+            print_section 'install_files' |
+            sed '/^[ ]*#/ d; s/^[ ]*-[ ]//'
+        )
+    )
+    if (( ${#file_patterns[@]} == 0 )); then
+        return
+    fi
+    install_files $(
+        cd "${package_dir}"
+        ls ${file_patterns[@]} ||
+            echo $(error 'Error: some files to install are not found.') >&2
+    ) || (
+        echo $(error 'Error:') "failed to install files in recipe :${recipe}"
+        exit 1
+    )
+}
+
+apply_patch_files() {
+    if ! grep -q '^patch_files:' "${recipe_file}"; then
+        return
+    fi
+    local script_header="\
+#!/bin/bash
+source '${script_dir}/bootstrap.sh'
+require 'recipe'
+output_dir='${output_dir}'
+package='${package}'
+recipe='${recipe}'
+recipe_options=(
+    ${recipe_options[*]}
+)
+eval \${recipe_options[@]}
+"
     cat "${recipe_file}" |
-        sed -n '/^patch_files:/,/^[^[:space:]#]/ {
-            /^[^[:space:]#]/ !p
-        }' | sed '{
+        print_section 'patch_files' |
+        sed '{
             1 i\
-            source '"'${script_dir}/bootstrap.sh'"'\
-            require recipe\
-            output_dir='"'${output_dir}'"'\
-            package='"'${package}'"'\
-            recipe='"'${recipe}'"'\
-            recipe_options=(\
-            \ \ \ \ '"${recipe_options[*]}"'\
-            )\
-            eval "${recipe_options[@]}"
+'"$(escape_sed_text <<<"${script_header}")"'
+# patch files
             s/^[ ][ ]//
             s/^\([^[:space:]#]*\):\s*$/patch_file \1 <<EOF/
             2,$ {
