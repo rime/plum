@@ -24,10 +24,29 @@ files_updated=0
 install_package() {
     local user_name="$(resolve_user_name "$1")"
     local package_name="$(resolve_package_name "$1")"
-    local branch="$(resolve_branch "$1")"
-    local package="${1%@*}"
-    local branch_label="${branch:+@${branch}}"
     local package_dir="${root_dir:-.}/package/${user_name}/${package_name}"
+
+    local package="$(resolve_package "$1")"
+    local branch="$(resolve_branch "$1")"
+    local branch_label="${branch:+@${branch}}"
+
+    local recipe="$(resolve_recipe "$1")"
+    local recipe_options=($(resolve_recipe_options "$1"))
+
+    fetch_or_update_package
+
+    if [[ -n "${recipe}" ]]; then
+        require 'recipe'
+        install_recipe "${package_dir}/${recipe}.recipe.yaml"
+    elif [[ -f "${package_dir}/recipe.yaml" ]]; then
+        require 'recipe'
+        install_recipe "${package_dir}/recipe.yaml"
+    else
+        install_files_from_package "${package_dir}"
+    fi
+}
+
+fetch_or_update_package() {
     if ! [[ -d "${package_dir}" ]]; then
         echo $(info 'Downloading package:') $(highlight "${package}") $(print_option "${branch_label}")
         local fetch_options=()
@@ -43,7 +62,6 @@ install_package() {
         fi
         "${script_dir}"/update-package.sh "${package_dir}" "${branch}"
     fi
-    install_files_from_package "${package_dir}"
 }
 
 install_files_from_package() {
@@ -52,16 +70,21 @@ install_files_from_package() {
     local data_files=(
         $(
             cd "${package_dir}"
-            ls *.* 2> /dev/null | grep -e '\.txt$' -e '\.yaml$'
+            ls *.* 2> /dev/null | grep -e '\.txt$' -e '\.yaml$' | \
+                grep -v -e '\.custom\.yaml$' -e '\.recipe\.yaml$' -e '^recipe\.yaml$'
             ls opencc/*.* 2> /dev/null | grep -e '\.json$' -e '\.ocd$' -e '\.txt$'
         )
     )
-    if [[ "${#data_files[@]}" -eq 0 ]]; then
+    install_files "${data_files[@]}"
+}
+
+install_files() {
+    if [[ "$#" -eq 0 ]]; then
         return
     fi
     local source_path
     local target_path
-    for file in "${data_files[@]}"; do
+    for file in "$@"; do
         source_path="${package_dir}/${file}"
         target_path="${output_dir}/${file}"
         if ! [ -e "${target_path}" ]; then
@@ -94,6 +117,6 @@ done
 if [[ "${files_updated}" -eq 0 ]]; then
     echo $(print_result 'No files updated.')
 else
-    echo $(print_result "Updated ${files_updated} files " \
+    echo $(print_result "Updated ~ ${files_updated} files " \
                         "from ${#package_list[@]} packages in") "'${output_dir}'"
 fi
