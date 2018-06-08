@@ -91,10 +91,10 @@ eval \${recipe_options[@]}
             s/^\([^[:space:]#]*\):\s*$/patch_file \1 <<EOF/
             2,$ {
                 /<<EOF/ i\
-                EOF
+EOF
             }
             $ a\
-            EOF
+EOF
         }' | bash || (
         echo $(error 'Error:') "failed to patch files in recipe ${rx}"
         exit 1
@@ -128,15 +128,15 @@ patch_file() {
             $ {
                 /^__patch:|^[[:space:]#]/ {
                     a\
-                        # Rx: '"${rx}"' {\
+# Rx: '"${rx}"' {\
 '"${patch_contents}"'
-                        # }
+# }
                     q
                 }
                 i\
-                    # Rx: '"${rx}"' {\
+# Rx: '"${rx}"' {\
 '"${patch_contents}"'
-                    # }
+# }
             }
         }
     ' "${target_file}" > "${target_file}.new" &&
