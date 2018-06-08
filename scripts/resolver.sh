@@ -5,7 +5,7 @@ require 'styles'
 # a recipe order takes the form
 #     <github-user>/<repository-name>@<branch>:<recipe>:key=value,...
 #
-# the "<github-user>/" and/or "@<branch>", ":<recipe>..." parts can be ommitted
+# the "<github-user>/" and/or "@<branch>", ":<recipe>..." parts can be omitted
 
 resolve_user_name() {
     local package="${1%%[@:]*}"
