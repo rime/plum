@@ -29,6 +29,9 @@ guess_rime_user_dir() {
         fcitx/fcitx-rime | fcitx-rime)
             export rime_dir="$HOME/.config/fcitx/rime"
             ;;
+        fcitx5/fcitx5-rime | fcitx5-rime)
+            export rime_dir="$HOME/.local/share/fcitx5/rime"
+            ;;
         rime/ibus-rime | ibus-rime)
             export rime_dir="$HOME/.config/ibus/rime"
             ;;
