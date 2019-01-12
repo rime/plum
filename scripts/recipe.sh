@@ -117,7 +117,7 @@ patch_file() {
     if grep -Fq "# Rx: ${rx}" "${target_file}"; then
         echo $(info 'Updating patch.')
         # first remove the existing patch
-        sed '/^# Rx: '"${rx//\//\\\/}"' {$/,/^# }$/ d' \
+        sed '/^# Rx: '"${rx//\//\\/}"' {$/,/^# }$/ d' \
             "${target_file}" > "${target_file}.new" &&
             mv "${target_file}.new" "${target_file}"
     fi
