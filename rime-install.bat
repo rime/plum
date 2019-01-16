@@ -292,7 +292,7 @@ if not errorlevel 1 (
    goto run_git_installer
 )
 
-set git_installer_path=%download_cache_dir%\
+set git_installer_path=%download_cache_dir%\%git_installer%
 if "%no_update%" == "1" if exist "%git_installer_path%" goto run_git_installer
 
 :download_git_installer
