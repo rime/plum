@@ -6,13 +6,13 @@ Rime configuration manager and input schema repository
 
 ## Project home
 
-[rime.im](http://rime.im)
+[rime.im](https://rime.im)
 
 ## Introduction
 
-**/plum/** is a configuration manager for [Rime](http://rime.im) input method engine.
+**/plum/** is a configuration manager for [Rime](https://rime.im) input method engine.
 
-/// **東風破** 是 [中州韻輸入法引擎](http://rime.im) 的配置管理工具。///
+/// **東風破** 是 [中州韻輸入法引擎](https://rime.im) 的配置管理工具。///
 
 It's designed for Rime users to install and update the default configuration and a collection
 of data packages maintained by [Rime Developers](https://github.com/rime).
@@ -185,7 +185,7 @@ unpack the ZIP archive and run `rime-install-bootstrap.bat` for initial setup.
 It will fetch the latest installer script `rime-install.bat` an create a shortcut to it,
 which can then be copied or moved anywhere for easier access.
 
-/// Windows 用家可以通過 [小狼毫](http://rime.im/download/#windows) 0.11 以上「輸入法設定／獲取更多輸入方案」調用配置管理器。///
+/// Windows 用家可以通過 [小狼毫](https://rime.im/download/#windows) 0.11 以上「輸入法設定／獲取更多輸入方案」調用配置管理器。///
 
 /// 或者下載獨立的 [啓動工具包][bootstrap-bundle]。///
 
