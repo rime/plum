@@ -41,6 +41,10 @@ install:
 	  install -d $(DESTDIR)$(RIME_DATA_DIR)/build; \
 	  install -m 644 $(OUTPUT)/build/*.* $(DESTDIR)$(RIME_DATA_DIR)/build; \
 	fi
+	@if [ -d "$(OUTPUT)/opencc" ]; then \
+	  install -d $(DESTDIR)$(RIME_DATA_DIR)/opencc; \
+	  install -m 644 $(OUTPUT)/opencc/*.* $(DESTDIR)$(RIME_DATA_DIR)/opencc; \
+	fi
 
 clean:
 	rm -rf $(OUTPUT) > /dev/null 2>&1 || true
