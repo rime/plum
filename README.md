@@ -65,8 +65,8 @@ Derivatives of Pinyin
 
 Other modern varieties of Chinese
 
-  - ℞ [`cantonese`](https://github.com/rime/rime-cantonese): 粵語拼音（有聲調） / Cantonese (with tones)
-  - ℞ [`jyutping`](https://github.com/rime/rime-jyutping): 粵拼 / Cantonese
+  - ℞ [`cantonese`](https://github.com/rime/rime-cantonese): 粵語拼音 / Cantonese
+  - ℞ [`jyutping`](https://github.com/rime/rime-jyutping): 粵拼（無聲調） / Cantonese (without tones)
   - ℞ [`wugniu`](https://github.com/rime/rime-wugniu): 上海吳語 / Wu (Shanghainese)
   - ℞ [`soutzoe`](https://github.com/rime/rime-soutzoe): 蘇州吳語 / Wu (Suzhounese)
 
