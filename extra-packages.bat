@@ -1,5 +1,6 @@
 set package_list=%package_list%^
  array^
+ cantonese^
  combo-pinyin^
  double-pinyin^
  emoji^
