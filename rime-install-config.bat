@@ -16,3 +16,6 @@ rem set rime_dir=%APPDATA%\Rime
 
 rem Disable /plum/ bash script; use batch installer only.
 rem set use_plum=0
+
+REM SET THE rime_dir VALUE
+REM FOR /F "USEBACKQ tokens=1,3,4,5,6,7,8,9,10,11,12 delims= " %I IN ( ` reg query HKCU\Software\Rime\Weasel\ /v RimeUserDir ` ) DO IF [%I] EQU [RimeUserDir] SET RMDIR=%J %K %L %M %N %O %P %Q %R %S
