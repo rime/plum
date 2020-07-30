@@ -44,19 +44,31 @@ check_recipe_info() {
     )
 }
 
-download_file() {
+get_filename() {
     local url="$1"
-    local add_filename=""
     # if a filename is specified, use it
     if [[ "$url" = *::* ]]; then
-        add_filename="-O${url%%::*}"
-        url="${url#*::}"
+        echo "${url%%::*}"
+    else
+        echo "${url##*/}"
     fi
+}
 
+download_file() {
+    local url="$1"
+    local filename="$(get_filename $url)"
+    local check_update=""
+    local msg='Downloading file:'
+
+    if [[ -e "${package_dir}/${filename}" ]]; then
+        check_update="-z $filename"
+        msg='Checking for update of external file:'
+    fi
+ 
     (
         cd "${package_dir}"
-        echo $(info 'Downloading file:') $(highlight "$url")
-        wget -q "$add_filename" "$url"
+        echo $(info "$msg") $(highlight "$filename")
+        curl -fL -o "$filename" $check_update "${url#*::}"
     )
 }
 
