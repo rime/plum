@@ -68,7 +68,7 @@ download_file() {
     (
         cd "${package_dir}"
         echo $(info "$msg") $(highlight "$filename")
-        curl -fL -o "$filename" $check_update "${url#*::}"
+        curl -fRL -o "$filename" $check_update "${url#*::}"
     )
 }
 
