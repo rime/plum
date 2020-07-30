@@ -17,6 +17,8 @@ install_recipe() {
 
     check_recipe_info
 
+    apply_download_files
+
     apply_install_files
 
     apply_patch_files
@@ -40,6 +42,55 @@ check_recipe_info() {
         echo $(error 'Invalid recipe:') "'${recipe_decl}' does not match file name '${recipe_file}'"
         exit 1
     )
+}
+
+get_filename() {
+    local url="$1"
+    # if a filename is specified, use it
+    if [[ "$url" = *::* ]]; then
+        echo "${url%%::*}"
+    else
+        echo "${url##*/}"
+    fi
+}
+
+download_file() {
+    local url="$1"
+    local filename="$(get_filename $url)"
+    local check_update=""
+    local msg='Downloading file:'
+
+    if [[ -e "${package_dir}/${filename}" ]]; then
+        check_update="-z $filename"
+        msg='Checking for update of external file:'
+    fi
+ 
+    (
+        cd "${package_dir}"
+        echo $(info "$msg") $(highlight "$filename")
+        curl -fL -o "$filename" $check_update "${url#*::}"
+    )
+}
+
+apply_download_files() {
+    if ! grep -q '^download_files:' "${recipe_file}"; then
+        return
+    fi
+    local file_patterns=(
+        $(cat "${recipe_file}" |
+            print_section 'download_files' |
+            sed '/^[ ]*#/ d; s/^[ ]*-[ ]//'
+        )
+    )
+    if (( ${#file_patterns[@]} == 0 )); then
+        return
+    fi
+    for _item in ${file_patterns[@]}; do
+        download_file $_item || (
+            echo $(error 'Error:') "failed to download files in recipe ${rx}"
+            exit 1
+        )
+    done
 }
 
 apply_install_files() {
