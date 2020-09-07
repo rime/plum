@@ -189,6 +189,8 @@ exit /b
 call :install_git /needed
 if errorlevel 1 exit /b %errorlevel%
 
+set WSLENV=plum_dir:rime_dir
+
 if defined plum_dir if exist "%plum_dir%"/rime-install (
    bash "%plum_dir%"/rime-install %*
    exit /b !errorlevel!
