@@ -1,0 +1,5 @@
+* text=auto
+*.bat text eol=crlf
+*.conf text eol=lf
+*.sh text eol=lf
+rime-install text eol=lf
