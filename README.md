@@ -149,13 +149,13 @@ bash rime-install lotem/rime-forge@master/lotem-packages.conf
 For third-party Rime distributions, specify the `rime_frontend` variable in the command line:
 
 ```sh
-rime_frontend=fcitx-rime bash rime-install
+rime_frontend=fcitx5-rime bash rime-install
 ```
 
 or set `rime_dir` to Rime user directory
 
 ```sh
-rime_dir="$HOME/.config/fcitx/rime" bash rime-install
+rime_dir="$HOME/./local/share/fcitx5/rime" bash rime-install
 ```
 
 To update /plum/ itself, run
