@@ -61,6 +61,9 @@ if [[ $? -gt 1 ]]; then
     exit
 fi
 target_branch="${branch:-master}"
+if [[ -z "${branch}" && "${current_branch}" == "main" ]]; then
+    target_branch="main"
+fi
 if [[ "${current_branch}" != "${target_branch}" ]]; then
     switch_branch "${target_branch}"
 elif [[ -z "${option_no_update}" ]]; then
