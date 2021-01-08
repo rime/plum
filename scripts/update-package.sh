@@ -30,6 +30,21 @@ git_current_branch() {
     fi
 }
 
+git_default_branch() {
+    if ! command git rev-parse 2> /dev/null
+    then
+        return 2
+    fi
+    local ref="$(command git symbolic-ref refs/remotes/origin/HEAD 2> /dev/null)"
+    if [[ -n "$ref" ]]
+    then
+        echo "${ref#refs/remotes/origin/}"
+        return 0
+    else
+        return 1
+    fi
+}
+
 fetch_all_branches() {
     local fetch_all_pattern='\+refs/heads/\*:'
     if ! [[ "$(git config --get remote.origin.fetch)" =~ $fetch_all_pattern ]]; then
@@ -47,7 +62,7 @@ switch_branch() {
     local target_branch="$1"
     if [[ -z "${branch}" ]]; then
         echo $(warning 'WARNING:') "'${package_dir}' was on" \
-             $(print_option "${current_branch:-(detached HEAD)}") 'instead of' $(print_option 'master')
+             $(print_option "${current_branch:-(detached HEAD)}") 'instead of' $(print_option "${target_branch}")
     fi
     fetch_all_branches
     git checkout "${target_branch}" || exit 1
@@ -61,8 +76,10 @@ if [[ $? -gt 1 ]]; then
     exit
 fi
 target_branch="${branch:-master}"
-if [[ -z "${branch}" && "${current_branch}" == "main" ]]; then
-    target_branch="main"
+if [[ -z "${branch}" ]]; then
+    target_branch="$(git_default_branch)"
+else
+    target_branch="${branch}"
 fi
 if [[ "${current_branch}" != "${target_branch}" ]]; then
     switch_branch "${target_branch}"
