@@ -75,7 +75,6 @@ if [[ $? -gt 1 ]]; then
     echo $(warning 'WARNING:') "not a git repository, skipped updating '${package_dir}'"
     exit
 fi
-target_branch="${branch:-master}"
 if [[ -z "${branch}" ]]; then
     target_branch="$(git_default_branch)"
 else
