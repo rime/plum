@@ -68,7 +68,7 @@ if "%package%" == "7z" (
 ) else if "%package:.zip=%.zip" == "%package%" (
   if "https://github.com/%package:https://github.com/=%" == "%package%" (
      set user_repo_path=%package:https://github.com/=%
-     set package_repo=%user_repo_path:/archive/master.zip=%
+     set package_repo=!user_repo_path:/archive/master.zip=!
      call :download_package
   ) else (
     set package_file=%package%
