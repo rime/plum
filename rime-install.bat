@@ -68,7 +68,8 @@ if "%package%" == "7z" (
 ) else if "%package:.zip=%.zip" == "%package%" (
   if "https://github.com/%package:https://github.com/=%" == "%package%" (
      set user_repo_path=%package:https://github.com/=%
-     set package_repo=!user_repo_path:/archive/master.zip=!
+     set archive_name=%package:*/archive/=%
+     call set package_repo=%%user_repo_path:/archive/!archive_name!=%%
      call :download_package
   ) else (
     set package_file=%package%
@@ -110,11 +111,14 @@ if not defined downloader (
 )
 call :install_7z /needed
 if errorlevel 1 exit /b %errorlevel%
-set package_url=https://github.com/%package_repo%/archive/master.zip
+for /f "tokens=2 usebackq delims=:, " %%g in (`
+  %downloader% https://api.github.com/repos/%package_repo% ^| findstr default_branch
+`) do set default_branch=%%~g
+set package_url=https://github.com/%package_repo%/archive/%default_branch%.zip
 echo.
 echo Downloading %package_url% ...
 echo.
-set package_file=%download_cache_dir%\%package_repo:*/=%-master.zip
+set package_file=%download_cache_dir%\%package_repo:*/=%-%default_branch%.zip
 if "%no_update%" == "1" if exist "%package_file%" goto skip_download_package
 %downloader% "%package_url%" %save_to% "%package_file%"
 if errorlevel 1 (
