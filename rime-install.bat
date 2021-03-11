@@ -68,7 +68,9 @@ if "%package%" == "7z" (
 ) else if "%package:.zip=%.zip" == "%package%" (
   if "https://github.com/%package:https://github.com/=%" == "%package%" (
      set user_repo_path=%package:https://github.com/=%
-     set package_repo=%user_repo_path:/archive/master.zip=%
+     set archive_name=%package:*/archive/=%
+     for /f "tokens=1 usebackq delims=." %%g in ('!archive_name!') do set branch=%%g
+     call set package_repo=%%user_repo_path:/archive/!archive_name!=%%
      call :download_package
   ) else (
     set package_file=%package%
@@ -83,8 +85,17 @@ if "%use_plum%" == "1" (
   goto after_install_package
 )
 :fallback_to_builtin_installer
+set branch=
 if "https://github.com/%package:https://github.com/=%" == "%package%" (
-  set package_repo=%package:https://github.com/=%
+  set user_repo_path=%package:https://github.com/=%
+  if not "%package:/tree/=%" == "%package%" (
+    set branch=%package:*/tree/=%
+  )
+  if defined branch (
+    call set package_repo=%%user_repo_path:/tree/!branch!=%%
+  ) else (
+    set package_repo=!user_repo_path!
+  )
   call :download_package
 ) else if "%package:-packages.bat=%-packages.bat" == "%package%" (
   call "%package%"
@@ -93,10 +104,17 @@ if "https://github.com/%package:https://github.com/=%" == "%package%" (
   call "%package::=%-packages.bat"
   call :install_package_group
 ) else if not "%package:/=%" == "%package%" (
-  set package_repo=%package%
+  for /f "tokens=1,2 usebackq delims=@" %%g in ('%package%') do (
+    set package_repo=%%g
+    set branch=%%h
+  )
   call :download_package
 ) else (
-  set package_repo=rime/rime-%package:rime-=%
+  for /f "tokens=1,2 usebackq delims=@" %%g in ('%package%') do (
+    set user_repo_path=%%g
+    set branch=%%h
+  )
+  set package_repo=rime/rime-!user_repo_path:rime-=!
   call :download_package
 )
 :after_install_package
@@ -110,11 +128,16 @@ if not defined downloader (
 )
 call :install_7z /needed
 if errorlevel 1 exit /b %errorlevel%
-set package_url=https://github.com/%package_repo%/archive/master.zip
+if not defined branch (
+  for /f "tokens=2 usebackq delims=:, " %%g in (`
+    %downloader% https://api.github.com/repos/%package_repo% ^| findstr default_branch
+  `) do set branch=%%~g
+)
+set package_url=https://github.com/%package_repo%/archive/%branch%.zip
 echo.
 echo Downloading %package_url% ...
 echo.
-set package_file=%download_cache_dir%\%package_repo:*/=%-master.zip
+set package_file=%download_cache_dir%\%package_repo:*/=%-%branch%.zip
 if "%no_update%" == "1" if exist "%package_file%" goto skip_download_package
 %downloader% "%package_url%" %save_to% "%package_file%"
 if errorlevel 1 (
