@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ -z "${plum_repo}" ]]; then
     plum_repo='rime/plum'
