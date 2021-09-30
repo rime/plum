@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # encoding: utf-8
 
 script_dir="$(dirname "$0")"

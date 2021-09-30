@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 require 'styles'
 
@@ -121,7 +121,7 @@ apply_patch_files() {
         return
     fi
     local script_header="\
-#!/bin/bash
+#!/usr/bin/env bash
 source '${script_dir}/bootstrap.sh'
 require 'recipe'
 output_dir='${output_dir}'

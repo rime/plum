@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 old_branch=master
 new_branch=split-packages
