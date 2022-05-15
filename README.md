@@ -94,7 +94,7 @@ To prepare your Rime configuration for [ibus-rime](https://github.com/rime/ibus-
 [Squirrel](https://github.com/rime/squirrel), you can get started by running
 
 ```sh
-curl -fsSL https://git.io/rime-install | bash
+curl -fsSL https://raw.githubusercontent.com/rime/plum/master/rime-install | bash
 ```
 
 /// 用法：Linux、macOS 系統，在終端輸入以上命令行，安裝配置管理器及預設配方。 ///
@@ -111,7 +111,7 @@ For [Weasel](https://github.com/rime/weasel), please refer to the [Windows boots
 Alternatively, you can specify a configuration among `:preset`, `:extra` and `:all` (note the colon):
 
 ```sh
-curl -fsSL https://git.io/rime-install | bash -s -- :preset
+curl -fsSL https://raw.githubusercontent.com/rime/plum/master/rime-install | bash -s -- :preset
 ```
 
 This is equivalent to cloning this repo and running the local copy of `rime-install`:

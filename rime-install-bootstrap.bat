@@ -29,7 +29,7 @@ echo Error: downloader not found.
 exit /b 1
 :downloader_found
 
-set script_url=https://git.io/rime-install.bat
+set script_url=https://raw.githubusercontent.com/rime/plum/master/rime-install.bat
 set config_url=https://github.com/rime/plum/raw/master/rime-install-config.bat
 
 echo Downloading rime-install.bat ...
