@@ -23,11 +23,14 @@ preset extra all: clean
 minimal: clean
 	bash $(SRCDIR)/scripts/minimal-build.sh $(OUTPUT)
 
-preset-bin: preset build
+preset-bin: preset
+	$(MAKE) build
 
-all-bin: all build
+all-bin: all
+	$(MAKE) build
 
-minimal-bin: minimal build
+minimal-bin: minimal
+	$(MAKE) build
 
 build:
 	rime_deployer --build $(OUTPUT)
