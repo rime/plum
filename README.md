@@ -52,7 +52,7 @@ Chinese input methods including those based on modern dialects and historical Ch
 
 Modern Standard Madarin
 
-  - ℞ [`luna-pinyin`](https://github.com/rime/rime-luna-pinyin): 朙月拼音 / Pinyin input method for Tranditional Chinese
+  - ℞ [`luna-pinyin`](https://github.com/rime/rime-luna-pinyin): 朙月拼音 / Pinyin input method for Traditional Chinese
   - ℞ [`terra-pinyin`](https://github.com/rime/rime-terra-pinyin): 地球拼音 / School-taught Pinyin, with tone marks
   - ℞ [`bopomofo`](https://github.com/rime/rime-bopomofo): 注音 / Zhuyin (aka. Bopomofo)
   - ℞ [`pinyin-simp`](https://github.com/rime/rime-pinyin-simp): 袖珍簡化字拼音
