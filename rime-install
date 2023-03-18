@@ -6,7 +6,7 @@ fi
 
 if [[ -z "${plum_dir}" ]]; then
     # am I in a working copy already?
-    plum_dir="$(dirname "$0")"
+    plum_dir="$(dirname "$(readlink -f "$0")")"
     if ! [[ -f "${plum_dir}"/scripts/install-packages.sh ]]; then
         # make a copy of plum in a subdirectory
         plum_dir='plum'
