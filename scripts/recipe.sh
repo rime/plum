@@ -76,10 +76,15 @@ apply_download_files() {
     if ! grep -q '^download_files:' "${recipe_file}"; then
         return
     fi
-    local file_patterns=(
-        $(cat "${recipe_file}" |
-            print_section 'download_files' |
-            sed '/^[ ]*#/ d; s/^[ ]*-[ ]//'
+    recipt_content=$(cat "${recipe_file}")
+    (
+        cd "${package_dir}"
+        local file_patterns=(
+            $(
+                echo "${recipt_content}" |
+                    print_section 'install_files' |
+                    sed '/^[ ]*#/ d; s/^[ ]*-[ ]//'
+            )
         )
     )
     if (( ${#file_patterns[@]} == 0 )); then
@@ -97,10 +102,15 @@ apply_install_files() {
     if ! grep -q '^install_files:' "${recipe_file}"; then
         return
     fi
-    local file_patterns=(
-        $(cat "${recipe_file}" |
-            print_section 'install_files' |
-            sed '/^[ ]*#/ d; s/^[ ]*-[ ]//'
+    recipt_content=$(cat "${recipe_file}")
+    (
+        cd "${package_dir}"
+        local file_patterns=(
+            $(
+                echo "${recipt_content}" |
+                    print_section 'install_files' |
+                    sed '/^[ ]*#/ d; s/^[ ]*-[ ]//'
+            )
         )
     )
     if (( ${#file_patterns[@]} == 0 )); then
