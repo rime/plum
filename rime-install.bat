@@ -225,7 +225,7 @@ if exist plum/rime-install (
 ) else (
   echo Downloading rime-install ...
   set script_url=https://raw.githubusercontent.com/rime/plum/master/rime-install
-  curl -fsSL "%script_url%" -o "%download_cache_dir%"/rime-install
+  curl -fsSL "!script_url!" -o "%download_cache_dir%"/rime-install
   if errorlevel 1 (
     set error_message=Error downloading rime-install
     goto error
