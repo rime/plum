@@ -212,7 +212,8 @@ exit /b
 call :install_git /needed
 if errorlevel 1 exit /b %errorlevel%
 
-set WSLENV=plum_dir:rime_dir
+rem use /p flag to properly translate Windows paths to WSL paths
+set WSLENV=plum_dir/p:rime_dir/p
 
 if defined plum_dir if exist "%plum_dir%"/rime-install (
    bash "%plum_dir%"/rime-install %*
