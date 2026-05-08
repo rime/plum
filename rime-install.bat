@@ -176,9 +176,11 @@ pushd "%unpack_package_dir%"
 for %%f in (
     *.yaml
     *.txt
+    *.lua
     opencc\*.json
     opencc\*.ocd
     opencc\*.txt
+    lua\*.lua
 ) do (
   echo.
   echo Installing %%f ...
