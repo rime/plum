@@ -176,6 +176,9 @@ pushd "%unpack_package_dir%"
 for %%f in (
     *.yaml
     *.txt
+    *.gram
+    *.lua
+    *.db
     opencc\*.json
     opencc\*.ocd
     opencc\*.txt
