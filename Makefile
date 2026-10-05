@@ -50,7 +50,7 @@ install:
 	fi
 
 clean:
-	rm -rf $(OUTPUT) > /dev/null 2>&1 || true
+	rm -rf -- "$(OUTPUT)" > /dev/null 2>&1 || true
 
 VERSION = $(shell date "+%Y%m%d")
 
